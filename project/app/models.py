@@ -20,3 +20,6 @@ class weight(models.Model):
     price=models.TextField()
     offer_price=models.TextField()
     weight=models.TextField(null=True)
+
+    def __str__(self):
+        return self.p_name.name
