@@ -45,7 +45,44 @@
     border: 1px solid rgba(0, 0, 0, 0.219);
     border-radius: 10px;
 }
+.weight1:hover{
+    border: 1px solid rgba(0, 0, 0, 0.812);
+}
 #weight{
     margin-top: 10px;
     font-weight: 500;
 }
+.weight-price{
+    display: flex;
+    /* background-color: red; */
+    width: 65%;
+    justify-content: space-between;
+}
+.buttons{
+    margin-top: 30px;
+}
+.button1 a{
+    background-color: rgb(233, 193, 34);
+    color: white;
+}
+.button1 a:hover{
+    background-color: rgb(167, 138, 24);
+    color: white;
+}
+.button2 a{
+    background-color: orange;
+    color: white;
+}
+.button2 a:hover{
+    background-color: rgb(147, 96, 2);
+    color: white;
+}
+
+.image{
+    display: none;
+}
+
+.photo1:hover .image img{
+    display: block;
+}
+
