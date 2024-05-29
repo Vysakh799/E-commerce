@@ -1,0 +1,51 @@
+.threeparts{
+    margin-top: 200px;
+    display: flex;
+    justify-content: space-between;
+}
+.part1 div img{
+    height: 50px;
+    opacity: 0.6;
+}
+.part1 div{
+    margin-bottom: 15px;
+    border: 1px solid rgba(0, 0, 0, 0.486);
+}
+.part1{
+    width: fit-content ;
+}
+.part1 div img:hover{
+    opacity: 1;
+}
+.part2 img{
+    height: 500px;
+}
+.location{
+    display: flex;
+    color: rgb(0, 153, 255);
+    font-weight: 500;
+}
+.location .location-logo{
+    margin-top: -3px;
+}
+.location p{
+    margin-left: 5px;
+}
+.offerprice{
+    text-decoration: line-through;
+    color: #cccccc;
+    margin-bottom: 0;
+    margin-top: -15px;
+}
+.weight1{
+    /* background-color: red; */
+    width: fit-content;
+    padding-right: 10px;
+    padding-left: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.219);
+    border-radius: 10px;
+}
+#weight{
+    margin-top: 10px;
+    font-weight: 500;
+}
