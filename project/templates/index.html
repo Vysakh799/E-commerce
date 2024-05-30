@@ -291,39 +291,41 @@
 				<div class="row">
 					<!-- single product -->
 					{% for k in price %}
-					<div class="col-lg-3 col-md-6">
-						<div class="single-product">
-							<img class="img-fluid" src="{{k.p_name.image1.url}}" alt="" height="250px">
-							<div class="product-details">
-								<h6>{{k.p_name.name}}</h6>
-								<div class="price">
-								
-									<h6>{{k.offer_price}}</h6>
-									<h6 class="l-through">{{k.price}}</h6>
-								
-								</div>
-								<div class="prd-bottom">
-
-									<a href="" class="social-info">
-										<span class="ti-bag"></span>
-										<p class="hover-text">add to bag</p>
-									</a>
-									<a href="" class="social-info">
-										<span class="lnr lnr-heart"></span>
-										<p class="hover-text">Wishlist</p>
-									</a>
-									<a href="" class="social-info">
-										<span class="lnr lnr-sync"></span>
-										<p class="hover-text">compare</p>
-									</a>
-									<a href="" class="social-info">
-										<span class="lnr lnr-move"></span>
-										<p class="hover-text">view more</p>
-									</a>
+					<a href="../products/{{k.p_name.pk}}">
+						<div class="col-lg-3 col-md-6">
+							<div class="single-product">
+								<img class="img-fluid" src="{{k.p_name.image1.url}}" alt="" height="250px">
+								<div class="product-details">
+									<h6>{{k.p_name.name}}</h6>
+									<div class="price">
+									
+										<h6>{{k.offer_price}}</h6>
+										<h6 class="l-through">{{k.price}}</h6>
+									
+									</div>
+									<div class="prd-bottom">
+	
+										<a href="" class="social-info">
+											<span class="ti-bag"></span>
+											<p class="hover-text">add to bag</p>
+										</a>
+										<a href="" class="social-info">
+											<span class="lnr lnr-heart"></span>
+											<p class="hover-text">Wishlist</p>
+										</a>
+										<a href="" class="social-info">
+											<span class="lnr lnr-sync"></span>
+											<p class="hover-text">compare</p>
+										</a>
+										<a href="" class="social-info">
+											<span class="lnr lnr-move"></span>
+											<p class="hover-text">view more</p>
+										</a>
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>
+					</a>
 					{% endfor %}
 					</div>
 				</div>

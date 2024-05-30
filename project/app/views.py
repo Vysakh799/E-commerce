@@ -20,3 +20,8 @@ def index(request):
     data3=product.objects.all()[::-1][:3]
     addp=filter(data3,price)
     return render(request,'index.html',{'data':data,'price':price2,'allp':allp,'addp':addp})
+
+def products(request,pk):
+    product1=product.objects.get(pk=pk)
+    weights=weight.objects.filter(p_name=product1)
+    return render(request,'product.html',{'weights':weights,'product1':product1})
