@@ -15,7 +15,7 @@ def index(request):
     data=product.objects.all()[::-1][:5]
     price=weight.objects.all()
     price2=filter(data,price)
-    data2=product.objects.all()[:5]
+    data2=product.objects.all()
     allp=filter(data2,price)
     data3=product.objects.all()[::-1][:3]
     addp=filter(data3,price)
@@ -25,3 +25,9 @@ def products(request,pk):
     product1=product.objects.get(pk=pk)
     weights=weight.objects.filter(p_name=product1)
     return render(request,'product.html',{'weights':weights,'product1':product1})
+
+def login(request):
+    return render(request,"login.html")
+
+def signup(request):
+    return render(request,"signup.html")
