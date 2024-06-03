@@ -1,6 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from.models import *
-
+from django.contrib import messages
 
 def filter(data,price):
     price2=[]
@@ -30,4 +30,19 @@ def login(request):
     return render(request,"login.html")
 
 def signup(request):
-    return render(request,"signup.html")
+    if request.method=="POST":
+        name=request.POST['name']
+        phno=request.POST['phno']
+        email=request.POST['email']
+        username=request.POST['username']
+        password=request.POST['password']
+        cnf_password=request.POST['cnf_password']
+        
+        data=users.objects.create(name=name,phno=phno,email=email,username=username,password=password,cnf_password=cnf_password)
+        data.save()
+
+        messages.warning(request, "Account created successfully pls login to continue !")  # recorded
+
+        return redirect(login)
+    else:
+        return render(request,"signup.html")

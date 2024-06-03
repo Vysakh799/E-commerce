@@ -23,3 +23,14 @@ class weight(models.Model):
 
     def __str__(self):
         return self.p_name.name
+
+class users(models.Model):
+    name=models.TextField()
+    phno=models.IntegerField()
+    email=models.EmailField()
+    username=models.TextField()
+    password=models.TextField()
+    cnf_password=models.TextField()
+
+    def __str__(self):
+        return self.name
