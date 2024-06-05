@@ -30,8 +30,10 @@ def index(request):
 def products(request,pk):
     product1=product.objects.get(pk=pk)
     weights=weight.objects.filter(p_name=product1)
-    
-    return render(request,'product_copy.html',{'weights':weights,'product1':product1,'user':getuser(request)})
+    data=product.objects.filter(type=product1.type)
+    price=weight.objects.all()
+    price2=filter(data,price)
+    return render(request,'product_copy.html',{'weights':weights,'product1':product1,'user':getuser(request),'data':data,'price':price2})
 
 def login(request):
    
