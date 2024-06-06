@@ -220,11 +220,11 @@
         <div class="col-lg-2">
 
 	</div>
-	<div class="alsolike">
+	<div class="alsolike" style="margin-top: 100px;">
 		<div class="head">
-			<p>You Might also like</p>
+			<p style="font-size: 23px; font-weight: 600; color: black;">You Might also like</p>
 		</div>
-		<div class="alsopro row">
+		<div class="alsopro row mt-5">
 			{% for k in price %}
 				{% if k.p_name.name != product1.name %}
 					<a href="../products/{{k.p_name.pk}}">
