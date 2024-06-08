@@ -16,6 +16,14 @@ def filter(data,price):
                 price2.append(j)
                 break
     return price2
+
+def types(request):
+    type=product.objects.all()
+    type2=[]
+    for i in type:
+         if i.type not in type2:
+              type2.append(i.type)
+    return type2
 # Create your views here.
 def index(request):
     data=product.objects.all()[::-1][:5]
@@ -25,7 +33,12 @@ def index(request):
     allp=filter(data2,price)
     data3=product.objects.all()[::-1][:3]
     addp=filter(data3,price)
-    return render(request,'index.html',{'data':data,'price':price2,'allp':allp,'addp':addp,'user':getuser(request)})
+    # type=product.objects.all()
+    # type2=[]
+    # for i in type:
+    #      if i.type not in type2:
+    #           type2.append(i.type)
+    return render(request,'index.html',{'data':data,'price':price2,'allp':allp,'addp':addp,'user':getuser(request),'type':types(request)})
 
 def products(request,pk):
     product1=product.objects.get(pk=pk)
@@ -33,7 +46,7 @@ def products(request,pk):
     data=product.objects.filter(type=product1.type)
     price=weight.objects.all()
     price2=filter(data,price)
-    return render(request,'product_copy.html',{'weights':weights,'product1':product1,'user':getuser(request),'data':data,'price':price2})
+    return render(request,'product_copy.html',{'weights':weights,'product1':product1,'user':getuser(request),'data':data,'price':price2,'type':types(request)})
 
 def login(request):
    
@@ -50,7 +63,7 @@ def login(request):
         
             return redirect(index)
         else:
-            return render(request,"login.html")
+            return render(request,"login.html",{'type':types(request)})
 def logout(request):
      del request.session['user']
      return redirect(index)
@@ -70,4 +83,10 @@ def signup(request):
 
         return redirect(login)
     else:
-        return render(request,"signup.html")
+        return render(request,"signup.html",{'type':types(request)})
+
+def catagory(request,type):
+    data=product.objects.filter(type=type)
+    price=weight.objects.all()
+    price2=filter(data,price)
+    return render(request,'catagory.html',{'data':data,'price':price2,'type':types(request)})
