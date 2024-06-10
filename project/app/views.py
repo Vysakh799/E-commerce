@@ -90,3 +90,6 @@ def catagory(request,type):
     price=weight.objects.all()
     price2=filter(data,price)
     return render(request,'catagory.html',{'data':data,'price':price2,'type':types(request)})
+
+def user(request):
+     return render(request,'user.html')
