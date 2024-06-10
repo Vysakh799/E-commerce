@@ -30,7 +30,8 @@
 	<link rel="stylesheet" href="{% static 'css/ion.rangeSlider.css' %}">
 	<link rel="stylesheet" href="{% static 'css/ion.rangeSlider.skinFlat.css' %}"">
 	<link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
-	<link rel="stylesheet" href="{% static 'css/main_copy.css' %}">
+	<!-- <link rel="stylesheet" href="{% static 'css/main_copy.css' %}"> -->
+	 <link rel="stylesheet" href="../static/css/main_copy.css">
 	<link rel="stylesheet" href="{% static 'css/product_copy_copy.css' %}">
 	<!-- Option 1: Include in HTML -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -74,7 +75,7 @@
 					<!-- Collect the nav links, forms, and other content for toggling -->
 					<div class="collapse navbar-collapse offset" id="navbarSupportedContent">
 						<ul class="nav navbar-nav menu_nav ml-auto">
-							<li class="nav-item active"><a class="nav-link" href="../">Home</a></li>
+							<li class="nav-item"><a class="nav-link" href="../">Home</a></li>
 							<li class="nav-item submenu dropdown">
 								<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
 								 aria-expanded="false">Shop</a>
@@ -103,11 +104,11 @@
 								<button class="search mt-2" id="index-button" style="border: 1px solid white; background-color: white;"><i class="bi bi-search" id="search" style="font-size: 15px;"></i></button>
 							</li>
 							{% if user %}
-							<li class="nav-item submenu dropdown">
+							<li class="nav-item submenu dropdown active">
 								<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
 								 aria-expanded="false"><i class="bi bi-person-circle" style="font-size: 18px;"></i></a>
 								<ul class="dropdown-menu">
-									<li class="nav-item"><a class="nav-link" href="">Profile</a></li>
+									<li class="nav-item"><a class="nav-link" href="../user">Profile</a></li>
 									<li class="nav-item"><a class="nav-link" href="../logout">Logout</a></li>
 									
 								</ul>
@@ -133,14 +134,62 @@
 	
 
     <div class="container">
-        <div class="col-lg-8" style="margin-top: 150px;">
-            <img src="{% static 'img/user.png' %}" alt="" width="29%" style="border-radius: 60%;">
-            <a href="" class="btn btn-danger rounded-circle" style="position: relative; top: 80px; right: 70px; height: 40px;"><i class="bi bi-camera-fill"></i></a>
-        </div>
-        <div class="col-lg-4 mt-3">
-            <h3>Ajith</h3>
+        <div class="head" style="margin-top: 130px;">
+			<h3>Hi</h3>
 			
-        </div>
+		</div>
+		<div class="services row justify-content-between">
+			<div class="col-lg-3 row p-3 service" style="border: 2px solid rgb(187, 180, 180); border-radius: 20px; transition: ease 0.4s;">
+				<div class="col-lg-3">
+					<i class="bi bi-box" style="font-size: 50px;color: orange;"></i>
+				</div>
+				<div class="col-lg-9" style=" display: flex; align-items: center; justify-content: center;">
+					<h3>Your Orders</h3>
+				</div>
+			</div>
+			<div class="col-lg-3 row p-3 service" style="border: 2px solid rgb(187, 180, 180); border-radius: 20px; transition: ease 0.4s;">
+				<div class="col-lg-3">
+					<i class="bi bi-box" style="font-size: 50px;color: orange;"></i>
+				</div>
+				<div class="col-lg-9" style=" display: flex; align-items: center; justify-content: center;">
+					<h3>Your Orders</h3>
+				</div>
+			</div>
+			<div class="col-lg-3 row p-3 service" style="border: 2px solid rgb(187, 180, 180); border-radius: 20px; transition: ease 0.4s;">
+				<div class="col-lg-3">
+					<i class="bi bi-box" style="font-size: 50px;color: orange;"></i>
+				</div>
+				<div class="col-lg-9" style=" display: flex; align-items: center; justify-content: center;">
+					<h3>Your Orders</h3>
+				</div>
+			</div>
+		</div>
+		<div class="services row justify-content-between">
+			<div class="col-lg-3 row p-3 service" style="border: 2px solid rgb(187, 180, 180); border-radius: 20px; transition: ease 0.4s;">
+				<div class="col-lg-3">
+					<i class="bi bi-box" style="font-size: 50px;color: orange;"></i>
+				</div>
+				<div class="col-lg-9" style=" display: flex; align-items: center; justify-content: center;">
+					<h3>Your Orders</h3>
+				</div>
+			</div>
+			<div class="col-lg-3 row p-3 service" style="border: 2px solid rgb(187, 180, 180); border-radius: 20px; transition: ease 0.4s;">
+				<div class="col-lg-3">
+					<i class="bi bi-box" style="font-size: 50px;color: orange;"></i>
+				</div>
+				<div class="col-lg-9" style=" display: flex; align-items: center; justify-content: center;">
+					<h3>Your Orders</h3>
+				</div>
+			</div>
+			<div class="col-lg-3 row p-3 service" style="border: 2px solid rgb(187, 180, 180); border-radius: 20px; transition: ease 0.4s;">
+				<div class="col-lg-3">
+					<i class="bi bi-box" style="font-size: 50px;color: orange;"></i>
+				</div>
+				<div class="col-lg-9" style=" display: flex; align-items: center; justify-content: center;">
+					<h3>Your Orders</h3>
+				</div>
+			</div>
+		</div>	
 
     </div>
 
