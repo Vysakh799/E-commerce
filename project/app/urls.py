@@ -10,4 +10,6 @@ urlpatterns = [
     path('catagory/<type>',views.catagory),
     path('user',views.user),
     path('yourorders',views.yourorders),
+    path('address',views.address),
+    path('add_address',views.add_address)
 ]

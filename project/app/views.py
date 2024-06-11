@@ -63,7 +63,7 @@ def login(request):
         
             return redirect(index)
         else:
-            return render(request,"login.html",{'type':types(request)})
+            return render(request,"login.html",{'type':types(request),'user':getuser(request)})
 def logout(request):
      del request.session['user']
      return redirect(index)
@@ -83,19 +83,25 @@ def signup(request):
 
         return redirect(login)
     else:
-        return render(request,"signup.html",{'type':types(request)})
+        return render(request,"signup.html",{'type':types(request),'user':getuser(request)})
 
 def catagory(request,type):
     data=product.objects.filter(type=type)
     price=weight.objects.all()
     price2=filter(data,price)
-    return render(request,'catagory.html',{'data':data,'price':price2,'type':types(request)})
+    return render(request,'catagory.html',{'data':data,'price':price2,'type':types(request),'user':getuser(request)})
 
 def user(request):
     price=weight.objects.all()
     data2=product.objects.all()
     allp=filter(data2,price)
-    return render(request,'user.html',{'allp':allp})
+    return render(request,'user.html',{'allp':allp,'type':types(request),'user':getuser(request)})
 
 def yourorders(request):
-     return render(request,'yourorders.html')
+     return render(request,'yourorders.html',{'type':types(request),'user':getuser(request)})
+
+def address(request):
+     return render(request,'address.html',{'type':types(request),'user':getuser(request)})
+
+def add_address(request):
+     return render(request,'add_address.html',{'type':types(request),'user':getuser(request)})
