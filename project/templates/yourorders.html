@@ -54,6 +54,7 @@
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
 	<script src="{% static 'js/gmaps.min.js' %}"></script>
 	<script src="{% static 'js/main.js' %}"></script>
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
 
 </head>
 
@@ -134,90 +135,43 @@
 	
 
     <div class="container">
-		<div class="services row justify-content-between p-5" style="margin-top: 150px;">
-			<a href="../yourorders" class="col-lg-4 row p-3 ">
-				<div class="row p-3 service " style="border: 2px solid rgb(187, 180, 180); border-radius: 20px; transition: ease 0.4s;">
-					<div class="col-lg-3">
-						<i class="bi bi-box" style="font-size: 50px;color: orange;"></i>
-					</div>
-					<div class="col-lg-9 pl-3" style=" display: flex; justify-content: center; flex-direction: column;">
-						<h3>Your Orders</h3>
-						<p style="color: gray;">Track,return, or buy things again </p>
-					</div>
+        <div class="col-lg-3">
+            
+        </div>
+		<div class="services row justify-content-between p-5">
+			<div class="col-lg-4 row p-3 service" style="border: 2px solid rgb(187, 180, 180); border-radius: 20px; transition: ease 0.4s;">
+				<div class="col-lg-3">
+					<i class="bi bi-truck" style="font-size: 50px;color: orange;"></i>
 				</div>
-			</a>
-			<a href="" class="col-lg-4 row p-3 ">
-				<div class="row p-3 service" style="border: 2px solid rgb(187, 180, 180); border-radius: 20px; transition: ease 0.4s;">
-					<div class="col-lg-3">
-						<i class="bi bi-geo-alt" style="font-size: 50px;color: orange;"></i>
-					</div>
-					<div class="col-lg-9" style=" display: flex; justify-content: center; flex-direction: column;">
-						<h3>Your Addresses</h3>
-						<P style="color: gray;">Edit or Add Addresses</P>
-					</div>
+				<div class="col-lg-9 pl-3" style=" display: flex; justify-content: center; flex-direction: column;">
+					<h3>Track your order</h3>
+					<p>Date for the arrival</p>
 				</div>
-			</a>
-			<a href="" class="col-lg-4 row p-3">
-				<div class="row p-3 service" style="border: 2px solid rgb(187, 180, 180); border-radius: 20px; transition: ease 0.4s;">
-					<div class="col-lg-3">
-						<i class="bi bi-shield-lock" style="font-size: 50px;color: orange;"></i>
-					</div>
-					<div class="col-lg-9" style=" display: flex; justify-content: center; flex-direction: column;">
-						<h3>Login & Security</h3>
-						<p style="color: gray;">Edit Personal Info</p>
-					</div>
-				</div>	
-			</a>
+			</div>
+			<div class="col-lg-4 row p-3 service" style="border: 2px solid rgb(187, 180, 180); border-radius: 20px; transition: ease 0.4s;">
+				<div class="col-lg-3">
+					<i class="bi bi-reply" style="font-size: 50px;color: orange;"></i>
+				</div>
+				<div class="col-lg-9" style=" display: flex; justify-content: center; flex-direction: column;">
+					<h3>Return product</h3>
+					<P>Return & Choose another one </P>
+				</div>
+			</div>
+			<div class="col-lg-4 row p-3 service" style="border: 2px solid rgb(187, 180, 180); border-radius: 20px; transition: ease 0.4s;">
+				<div class="col-lg-3">
+					<i class="bi bi-arrow-clockwise" style="font-size: 50px;color: orange;"></i>
+				</div>
+				<div class="col-lg-9" style=" display: flex; justify-content: center; flex-direction: column;">
+					<h3>Buy Again</h3>
+					<p>If you like it you will do it </p>
+				</div>
+			</div>	
 		</div>
-		<div class="head" style="margin-top: 50px;">
-			<h3>Recommended for you</h3>
-		</div>
-		<div class="alsopro row mt-5" style="overflow-x: scroll; flex-wrap: nowrap;">
-			
-			{% for k in allp %}
-					<a href="../products/{{k.p_name.pk}}">
-						<div class="col-lg-3 col-md-6">
-							<div class="single-product">
-								<img class="img-fluid" src="{{k.p_name.image1.url}}" alt="" height="250px">
-								<div class="product-details">
-									<h6>{{k.p_name.name}}</h6>
-									<div class="price">
-									
-										<h6>{{k.offer_price}}</h6>
-										<h6 class="l-through">{{k.price}}</h6>
-									
-									</div>
-									<div class="prd-bottom">
-	
-										<a href="" class="social-info">
-											<span class="ti-bag"></span>
-											<p class="hover-text">add to bag</p>
-										</a>
-										<a href="" class="social-info">
-											<span class="lnr lnr-heart"></span>
-											<p class="hover-text">Wishlist</p>
-										</a>
-										<a href="" class="social-info">
-											<span class="lnr lnr-sync"></span>
-											<p class="hover-text">compare</p>
-										</a>
-										<a href="" class="social-info">
-											<span class="lnr lnr-move"></span>
-											<p class="hover-text">view more</p>
-										</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</a>
-					{% endfor %}
-		</div>
-
     </div>
 
 
 		<!-- start footer Area -->
-		<footer class="footer-area section_gap"  style="width: 100%; margin-top: 35px;">
+		<footer class="footer-area section_gap"  style="width: 100%; margin-top:83px ;">
 			<div class="container" >
 				<div class="row" style="display: block; text-align: center;">
 					<div class="col-lg-12  col-md-6 col-sm-6" 
