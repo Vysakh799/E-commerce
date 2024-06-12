@@ -34,3 +34,16 @@ class users(models.Model):
 
     def __str__(self):
         return self.name
+
+class addreses(models.Model):
+    u_name=models.ForeignKey(users,on_delete=models.CASCADE)
+    region=models.TextField()
+    fullname=models.TextField()
+    mobilenumber=models.TextField()
+    pincode=models.TextField()
+    add1=models.TextField()
+    add2=models.TextField()
+    landmark=models.TextField()
+    town=models.TextField()
+    state=models.TextField()
+

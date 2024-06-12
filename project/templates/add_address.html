@@ -138,16 +138,26 @@
 	</header>
 	
 
-    
-	<div class="container" style="margin-top: 150px; display: flex;">
-			<div class="col-lg-3">
-
+    <div class="container">
+		<a href="../address">
+			<div class="col-lg-3" style="margin-top: 180px; color: orange; ">
+				<i class="bi bi-box-arrow-left" style="font-size: 25px;"></i> Go back
 			</div>
+		</a>
+	</div>
+	<div class="container" style=" display: flex; margin-top: 25px;">
+
 			<div class="col-lg-6">
-				<form action="" class="form-group" style="display: flex; flex-direction: column; font-size: 15px;">
+				
+				<form action="../add_address" method="POST" class="form-group" style="display: flex; flex-direction: column; font-size: 15px;">
+					{% csrf_token %}
 					<div class="col-lg-12">
 						<select name="region" class="form-select">
-							<option value="">India</option>
+							<option value="India">India</option>
+							<option value="China">China</option>
+							<option value="Pakisthan">Pakisthan</option>
+							<option value="USA">USA</option>
+							<option value="Africa">Africa</option>
 						</select>
 					</div>
 					<div class="col-lg-12 mt-2">
@@ -155,8 +165,8 @@
 						<input type="text" name="fullname" id="" class="form-control">
 					</div>
 					<div class="col-lg-12 mt-1">
-						<label for="phno" style="font-weight: 500; color: black;">Mobile Number</label>
-						<input type="text" name="phno" id="" class="form-control" >
+						<label for="mobilenumber" style="font-weight: 500; color: black;">Mobile Number</label>
+						<input type="text" name="mobilenumber" id="" class="form-control" >
 						<p>May be used to assist delivery</p>
 					</div>
 					<div class="col-lg-12 mt-2">
@@ -173,27 +183,27 @@
 					</div>
 					<div class="col-lg-12 mt-2">
 						<label for="landmark" style="font-weight: 500; color: black;">Landmark</label>
-						<input type="text" name="add2" id="" class="form-control"  placeholder="Eg:Near Apollo Hospital">
+						<input type="text" name="landmark" id="" class="form-control"  placeholder="Eg:Near Apollo Hospital">
 					</div>
-					<div class="col-lg-12 mt-2" style="display: flex; ">
-						<div class="col-lg-6">
-							<label for="landmark" style="font-weight: 500; color: black;">Landmark</label>
-							<input type="text" name="add2" id="" class="form-control"  placeholder="Eg:Near Apollo Hospital">
-						</div>
-						<div class="col-lg-6">
+					<div class="col-lg-12 mt-2" ">
+							<label for="town" style="font-weight: 500; color: black;">Town/City</label>
+							<input type="text" name="town" id="" class="form-control">
+					</div>
+					<div class="col-lg-12 mt-2" ">
 							<label for="state" style="font-weight: 500; color: black;">State</label>
 							<select name="state" class="form-select">
-								<option value="">Kerala</option>
+								<option value="Kerala">Kerala</option>
+								<option value="Tamil Nadu">Tamil Nadu</option>
+								<option value="Hydrabhadh">Hydrabhadh</option>
+								<option value="Delhi">Delhi</option>
+								<option value="Karnataka">Karnataka</option>
 							</select>
-						</div>
 					</div>
+					
 					<div class="col-lg-12 mt-2">
 						<input type="submit" value="Add Address" class="btn btn-warning" style="width: 100%;">
 					</div>
 				</form>
-			</div>
-			<div class="col-lg-3">
-
 			</div>
 			
     </div>

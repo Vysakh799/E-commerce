@@ -134,7 +134,8 @@
 	
 
     <div class="container">
-		<div class="services row justify-content-between p-5" style="margin-top: 150px;">
+		<h3 style="margin-top: 150px;">Hi {{customer.name}} !!</h3>
+		<div class="services row justify-content-between p-5" >
 			<a href="../yourorders" class="col-lg-4 row p-3 ">
 				<div class="row p-3 service " style="border: 2px solid rgb(187, 180, 180); border-radius: 20px; transition: ease 0.4s;">
 					<div class="col-lg-3">
@@ -146,7 +147,7 @@
 					</div>
 				</div>
 			</a>
-			<a href="../address" class="col-lg-4 row p-3 ">
+			<a href="../address/{{customer.pk}}" class="col-lg-4 row p-3 ">
 				<div class="row p-3 service" style="border: 2px solid rgb(187, 180, 180); border-radius: 20px; transition: ease 0.4s;">
 					<div class="col-lg-3">
 						<i class="bi bi-geo-alt" style="font-size: 50px;color: orange;"></i>

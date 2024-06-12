@@ -92,16 +92,43 @@ def catagory(request,type):
     return render(request,'catagory.html',{'data':data,'price':price2,'type':types(request),'user':getuser(request)})
 
 def user(request):
+    data=users.objects.get(username=request.session.get('user'))
     price=weight.objects.all()
     data2=product.objects.all()
     allp=filter(data2,price)
-    return render(request,'user.html',{'allp':allp,'type':types(request),'user':getuser(request)})
+    return render(request,'user.html',{'allp':allp,'type':types(request),'user':getuser(request),'customer':data})
 
 def yourorders(request):
      return render(request,'yourorders.html',{'type':types(request),'user':getuser(request)})
 
 def address(request):
-     return render(request,'address.html',{'type':types(request),'user':getuser(request)})
+     data=users.objects.get(username=request.session.get('user'))
+     adr=addreses.objects.filter(u_name=data.pk)
+     return render(request,'address.html',{'type':types(request),'user':getuser(request),'customer':data,'adr':adr})
 
 def add_address(request):
-     return render(request,'add_address.html',{'type':types(request),'user':getuser(request)})
+    if 'user' in request.session:
+        data=users.objects.get(username=request.session.get('user'))
+          
+        if request.method=='POST':
+               region=request.POST['region']
+               fullname=request.POST['fullname']
+               mobilenumber=request.POST['mobilenumber']
+               pincode=request.POST['pincode']
+               add1=request.POST['add1']
+               add2=request.POST['add2']
+               landmark=request.POST['landmark']
+               town=request.POST['town']
+               state=request.POST['state']
+               print(region,fullname,state)
+               data=addreses.objects.create(u_name=data,region=region,fullname=fullname,mobilenumber=mobilenumber,pincode=pincode,add1=add1,add2=add2,landmark=landmark,town=town,state=state)
+               data.save()
+               return redirect(address)
+
+    else:
+        return redirect(login)
+    return render(request,'add_address.html',{'type':types(request),'user':getuser(request),'data':data})
+
+
+def cart(request):
+     return render(request,'cart.html')
