@@ -141,6 +141,20 @@
 				<i class="bi bi-box-arrow-left" style="font-size: 25px;"></i> Go back
 			</div>
 		</a>
+		<div class="col-lg-12">
+			{% if messages %}
+						{% for message in messages %}
+
+						<div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+							<strong>{{ message }}</strong> 
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							  <span aria-hidden="true">&times;</span>
+							</button>
+						  </div>
+						  {% endfor %}
+
+						  {% endif %}
+		</div>
 		<div class="services row justify-content-between p-5">
 			<a href="../add_address" class="col-lg-4 row ">
 				<div class="col-lg-12 p-3  mt-4 service" style="display: flex; justify-content: center; align-items: center; border: 2px solid rgb(187, 180, 180); border-radius: 20px; transition: ease 0.4s;">
@@ -159,9 +173,9 @@
 				{{i.state}} |
 				{{i.region}}</p>
 				<div class="col-lg-2" style="display: flex;">
-					<a href="">Edit</a>
+					<a href="../update_address/{{i.pk}}">Edit</a>
 					<p>&nbsp;|</p>
-					<a href="">&nbsp;Remove</a>
+					<a href="../remove_address/{{i.pk}}">&nbsp;Remove</a>
 				</div>
 			</div>	
 			{% endfor %}

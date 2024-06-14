@@ -161,22 +161,22 @@
 						<form class="row login_form" action="../signup" method="post" id="contactForm" novalidate="novalidate">
 							{% csrf_token %}
                             <div class="col-md-12 form-group">
-								<input type="text" class="form-control" id="name" name="name" placeholder="Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Name'">
+								<input type="text" required class="form-control" id="name" name="name" placeholder="Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Name'">
 							</div>
                             <div class="col-md-12 form-group">
-								<input type="text" class="form-control" id="name" name="phno" placeholder="Phno" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Phno'">
+								<input type="text" required class="form-control" id="name" name="phno" placeholder="Phno" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Phno'">
 							</div>
                             <div class="col-md-12 form-group">
-								<input type="email" class="form-control" id="name" name="email" placeholder="Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email'">
+								<input type="email" required class="form-control" id="name" name="email" placeholder="Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email'">
 							</div>
 							<div class="col-md-12 form-group">
-								<input type="text" class="form-control" id="name" name="username" placeholder="Username" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Username'">
+								<input type="text" required class="form-control" id="name" name="username" placeholder="Username" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Username'">
 							</div>
 							<div class="col-md-12 form-group">
-								<input type="password" class="form-control" id="name" name="password" placeholder="Password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password'">
+								<input type="password" required class="form-control" id="name" name="password" placeholder="Password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password'">
 							</div>
                             <div class="col-md-12 form-group">
-								<input type="password" class="form-control" id="name" name="cnf_password" placeholder="Conform Password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Conform Password'">
+								<input type="password" required class="form-control" id="name" name="cnf_password" placeholder="Conform Password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Conform Password'">
 							</div>
 							<div class="col-md-12 form-group">
 								<button type="submit" value="submit" class="primary-btn">Sign Up</button>

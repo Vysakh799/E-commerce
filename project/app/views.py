@@ -61,7 +61,7 @@ def login(request):
             except:
                 messages.warning(request, "Incorrect username or password!") 
         
-            return redirect(index)
+            return redirect(login)
         else:
             return render(request,"login.html",{'type':types(request),'user':getuser(request)})
 def logout(request):
@@ -75,11 +75,13 @@ def signup(request):
         username=request.POST['username']
         password=request.POST['password']
         cnf_password=request.POST['cnf_password']
+        if password==cnf_password:
+            data=users.objects.create(name=name,phno=phno,email=email,username=username,password=password)
+            data.save()
+            messages.warning(request, "Password Doesn't match !")  # recorded
+        else:
+            messages.warning(request, "Account created successfully pls login to continue !")  # recorded
         
-        data=users.objects.create(name=name,phno=phno,email=email,username=username,password=password,cnf_password=cnf_password)
-        data.save()
-
-        messages.warning(request, "Account created successfully pls login to continue !")  # recorded
 
         return redirect(login)
     else:
@@ -120,7 +122,6 @@ def add_address(request):
                landmark=request.POST['landmark']
                town=request.POST['town']
                state=request.POST['state']
-               print(region,fullname,state)
                data=addreses.objects.create(u_name=data,region=region,fullname=fullname,mobilenumber=mobilenumber,pincode=pincode,add1=add1,add2=add2,landmark=landmark,town=town,state=state)
                data.save()
                return redirect(address)
@@ -130,5 +131,72 @@ def add_address(request):
     return render(request,'add_address.html',{'type':types(request),'user':getuser(request),'data':data})
 
 
+def update_address(request,pk):
+    if 'user' in request.session:
+        data2=users.objects.get(username=request.session.get('user'))
+        data1=addreses.objects.get(pk=pk)
+        userdata=data1
+        if request.method=='POST':
+            region=request.POST['region']
+            fullname=request.POST['fullname']
+            mobilenumber=request.POST['mobilenumber']
+            pincode=request.POST['pincode']
+            add1=request.POST['add1']
+            add2=request.POST['add2']
+            landmark=request.POST['landmark']
+            town=request.POST['town']
+            state=request.POST['state']
+            data=addreses.objects.filter(pk=pk).update(region=region,fullname=fullname,mobilenumber=mobilenumber,pincode=pincode,add1=add1,add2=add2,landmark=landmark,town=town,state=state)
+            messages.success(request, "Address Successfully Updated!")
+            return redirect(address)
+            
+
+        return render(request,'update_address.html',{'userdata':userdata})
+    else:
+         return redirect(login)
+    
+def remove_address(request,pk):
+    if 'user' in request.session:
+        addreses.objects.get(pk=pk).delete()
+        messages.WARNING(request, "Address Deleted Successfully!!")
+    return redirect(address)   
 def cart(request):
      return render(request,'cart.html')
+
+def update_user(request):
+    if 'user' in request.session:
+        data=users.objects.get(username=request.session.get('user'))
+        if request.method=='POST':
+            name=request.POST['name']
+            phno=request.POST['phno']
+            email=request.POST['email']
+            username=request.POST['username']
+            data=users.objects.filter(username=data.username).update(name=name,phno=phno,email=email,username=username)
+            messages.success(request, "Personal Info Updated Successfully!")
+            return redirect(update)
+        
+    return render(request,'update_user.html',{'data':data})
+
+def update(request):
+     
+    return render(request,'update.html')
+
+def update_password(request):
+    if 'user' in request.session:
+        data=users.objects.get(username=request.session.get('user'))
+        if request.method=='POST':
+            currentpassword=request.POST['currentpassword']
+            newpassword=request.POST['newpassword']
+            confirmpassword=request.POST['confirmpassword']
+            try:
+                data=users.objects.get(password=currentpassword)
+                if newpassword==confirmpassword:
+                    data=users.objects.filter(pk=data.pk).update(password=newpassword)
+                    print(data)
+                    messages.success(request, "Successfully changed password!!")
+                else:
+                    messages.warning(request, "Password Doesn't match!!")
+            except:
+                messages.warning(request, "Incorrect Password!")
+
+    return render(request,'update_password.html')

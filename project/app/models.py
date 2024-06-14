@@ -30,7 +30,6 @@ class users(models.Model):
     email=models.EmailField()
     username=models.TextField()
     password=models.TextField()
-    cnf_password=models.TextField()
 
     def __str__(self):
         return self.name

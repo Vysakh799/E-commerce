@@ -152,7 +152,7 @@
 				<form action="../add_address" method="POST" class="form-group" style="display: flex; flex-direction: column; font-size: 15px;">
 					{% csrf_token %}
 					<div class="col-lg-12">
-						<select name="region" class="form-select">
+						<select name="region" class="form-select" required>
 							<option value="India">India</option>
 							<option value="China">China</option>
 							<option value="Pakisthan">Pakisthan</option>
@@ -162,20 +162,20 @@
 					</div>
 					<div class="col-lg-12 mt-2">
 						<label for="fullname" style="font-weight: 500; color: black;">Fulllname (First name and Last name)</label>
-						<input type="text" name="fullname" id="" class="form-control">
+						<input type="text" name="fullname" id="" class="form-control" required>
 					</div>
 					<div class="col-lg-12 mt-1">
 						<label for="mobilenumber" style="font-weight: 500; color: black;">Mobile Number</label>
-						<input type="text" name="mobilenumber" id="" class="form-control" >
+						<input type="text" name="mobilenumber" id="" class="form-control" required>
 						<p>May be used to assist delivery</p>
 					</div>
 					<div class="col-lg-12 mt-2">
 						<label for="pincode" style="font-weight: 500; color: black;">Pincode</label>
-						<input type="text" name="pincode" id="" class="form-control">
+						<input type="text" name="pincode" id="" class="form-control" required>
 					</div>
 					<div class="col-lg-12 mt-2">
 						<label for="add1" style="font-weight: 500; color: black;">Flat, Houseno.,Building, Company, Apartment</label>
-						<input type="text" name="add1" id="" class="form-control">
+						<input type="text" name="add1" id="" class="form-control" required>
 					</div>
 					<div class="col-lg-12 mt-2">
 						<label for="add2" style="font-weight: 500; color: black;">Area, Street, Sector, Village</label>
@@ -183,14 +183,14 @@
 					</div>
 					<div class="col-lg-12 mt-2">
 						<label for="landmark" style="font-weight: 500; color: black;">Landmark</label>
-						<input type="text" name="landmark" id="" class="form-control"  placeholder="Eg:Near Apollo Hospital">
+						<input type="text" name="landmark" id="" class="form-control"  placeholder="Eg:Near Apollo Hospital" required>
 					</div>
 					<div class="col-lg-12 mt-2" ">
 							<label for="town" style="font-weight: 500; color: black;">Town/City</label>
 							<input type="text" name="town" id="" class="form-control">
 					</div>
 					<div class="col-lg-12 mt-2" ">
-							<label for="state" style="font-weight: 500; color: black;">State</label>
+							<label for="state" style="font-weight: 500; color: black;" required>State</label>
 							<select name="state" class="form-select">
 								<option value="Kerala">Kerala</option>
 								<option value="Tamil Nadu">Tamil Nadu</option>
