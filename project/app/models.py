@@ -46,3 +46,16 @@ class addreses(models.Model):
     town=models.TextField()
     state=models.TextField()
 
+class contacts(models.Model):
+    name=models.TextField()
+    email=models.TextField()
+    subject=models.TextField()
+    description=models.TextField()
+
+    def __str__(self):
+        return self.name
+class cart_items(models.Model):
+    p_name=models.ForeignKey(product,on_delete=models.CASCADE)
+    w_product=models.ForeignKey(weight,on_delete=models.CASCADE)
+    quantity=models.TextField()
+    

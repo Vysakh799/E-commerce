@@ -1,6 +1,8 @@
 from django.shortcuts import render,redirect
 from.models import *
 from django.contrib import messages
+from django.conf import settings
+from django.core.mail import send_mail
 
 def getuser(request):
     user=False
@@ -200,3 +202,23 @@ def update_password(request):
                 messages.warning(request, "Incorrect Password!")
 
     return render(request,'update_password.html')
+
+
+def contact(request):
+    if 'user' in request.session:
+        if request.method=="POST":
+            name=request.POST['name']
+            email=request.POST['email']
+            subject=request.POST['subject']
+            description=request.POST['description']
+            data=contacts.objects.create(name=name,email=email,subject=subject,description=description)
+            data.save()
+            messages.success(request, "OK our team will contact you as soon as possible !!")
+
+            message = description
+            email_from = settings.EMAIL_HOST_USER
+            recipient_list = [email, ]
+            send_mail( subject, message, email_from, recipient_list )
+    else:
+        return redirect(login)
+    return render(request,'contact.html',{'type':types(request),'user':getuser(request)})

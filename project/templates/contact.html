@@ -95,7 +95,7 @@
 								</ul>
 							</li>
 							
-							<li class="nav-item"><a class="nav-link" href="../contact">Contact</a></li>
+							<li class="nav-item active"><a class="nav-link " href="../contact">Contact</a></li>
 							
 
 							<!-- </ul>
@@ -105,7 +105,7 @@
 								<button class="search mt-2" id="index-button" style="border: 1px solid white; background-color: white;"><i class="bi bi-search" id="search" style="font-size: 15px;"></i></button>
 							</li>
 							{% if user %}
-							<li class="nav-item submenu dropdown active">
+							<li class="nav-item submenu dropdown">
 								<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
 								 aria-expanded="false"><i class="bi bi-person-circle" style="font-size: 18px;"></i></a>
 								<ul class="dropdown-menu">
@@ -133,15 +133,8 @@
 		</div>
 	</header>
 	
-
-    
 	<div class="container">
-        <a href="../user">
-			<div class="col-lg-3" style="margin-top: 180px; color: orange; ">
-				<i class="bi bi-box-arrow-left" style="font-size: 25px;"></i> Go back
-			</div>
-		</a>
-		<div class="col-lg-12">
+		<div class="col-lg-6" style="margin-top: 150px;">
 			{% if messages %}
 						{% for message in messages %}
 
@@ -155,36 +148,22 @@
 
 						  {% endif %}
 		</div>
-		<div class="services row justify-content-between p-5">
-			<a href="../add_address" class="col-lg-4 row ">
-				<div class="col-lg-12 p-3  mt-4 service" style="display: flex; justify-content: center; align-items: center; border: 2px solid rgb(187, 180, 180); border-radius: 20px; transition: ease 0.4s;">
-					<div class="col-lg-4 " >
-						<i class="bi bi-plus" style="font-size: 55px; color: orange;" ></i>
-					</div>
-				</div>
-			</a>
-			{% for i in adr %}
-			<div class="col-lg-4 row p-3 mt-4 service ad" style="border: 2px solid rgb(187, 180, 180); border-radius: 20px; transition: ease 0.4s; flex-direction: column;">
-				<h4>{{i.fullname}}</h4>
-				<p>{{i.add1}} {{i.add2}}<br>
-				{{i.landmark}}<br>
-				Phno: {{i.mobilenumber}}<br>
-				{{i.pincode}} |
-				{{i.state}} |
-				{{i.region}}</p>
-				<div class="col-lg-2" style="display: flex;">
-					<a href="../update_address/{{i.pk}}">Edit</a>
-					<p>&nbsp;|</p>
-					<a href="../remove_address/{{i.pk}}">&nbsp;Remove</a>
-				</div>
-			</div>	
-			{% endfor %}
-			
-			<div class="col-lg-4 row p-3 ">
-				
-			</div>
+		<p style="color: orange; font-size: 25px; font-weight: 500; ">Contact Us</p>
+		<div class="form row ">
+			<form action="../contact" method="POST" class="form-group col-lg-12">
+				{% csrf_token %}
+				<input type="text" name="name" id="" class="form-control col-lg-4" placeholder="Name" required>
+				<input type="email" name="email" id="" class="form-control col-lg-4 mt-3" placeholder="Email" required>
+				<p>we will contact through this email</p>
+				<input type="text" name="subject" id="" class="form-control col-lg-6" placeholder="Subject" required>
+				<textarea name="description" id="" class="form-control col-lg-6 mt-3" placeholder="Description" required></textarea>
+				<input type="submit" value="Submit" class="col-lg-6 mt-3 bg-warning btn" >
+
+			</form>
 		</div>
-    </div>
+	</div>
+    
+	
 
 		<!-- start footer Area -->
 		<footer class="footer-area section_gap"  style="width: 100%; margin-top:83px ;">
