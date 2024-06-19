@@ -197,11 +197,14 @@
 			</div>
 			<div class="weight-price">
 				{% for i in weights %}
+				<a href="../products/{{product1.pk}}/{{i.pk}}">
 				<div class="weight1">
 					<p id="weight">{{i.weight}}</p>
+				
 					<p class="offerprice">{{i.price}}</p>
 					<p style="color: black;">{{i.offer_price}}</p>
 				</div>
+			    </a>
 				{% endfor %}
 			</div>
 			<div class="buttons">
@@ -294,8 +297,6 @@
 			</div>
 		</footer>
 		<!-- End footer Area -->
-
-
 
 	
 </body>

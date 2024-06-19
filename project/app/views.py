@@ -42,13 +42,17 @@ def index(request):
     #           type2.append(i.type)
     return render(request,'index.html',{'data':data,'price':price2,'allp':allp,'addp':addp,'user':getuser(request),'type':types(request)})
 
-def products(request,pk):
+def products(request,pk,pk1=None):
     product1=product.objects.get(pk=pk)
     weights=weight.objects.filter(p_name=product1)
     data=product.objects.filter(type=product1.type)
     price=weight.objects.all()
     price2=filter(data,price)
     return render(request,'product_copy.html',{'weights':weights,'product1':product1,'user':getuser(request),'data':data,'price':price2,'type':types(request)})
+
+
+# def products1(req,pk,pk1):
+
 
 def login(request):
    
@@ -217,7 +221,7 @@ def contact(request):
 
             message = description
             email_from = settings.EMAIL_HOST_USER
-            recipient_list = [email, ]
+            recipient_list = [email]
             send_mail( subject, message, email_from, recipient_list )
     else:
         return redirect(login)
