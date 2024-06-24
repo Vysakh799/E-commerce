@@ -45,13 +45,29 @@ def index(request):
 def products(request,pk,pk1=None):
     product1=product.objects.get(pk=pk)
     weights=weight.objects.filter(p_name=product1)
+    # weights1=weight.objects.filter(p_name=product1).first
+    # print(weights1)
+    if pk1:
+        selected=int(pk1)
+        print(request.session['weight'],'pk1',type(pk1))
+
+    else:
+        for i in weights[:1]:
+            request.session['weight']=str(i.pk)
+            selected=i.pk
+        print('pk2')
     data=product.objects.filter(type=product1.type)
     price=weight.objects.all()
     price2=filter(data,price)
-    return render(request,'product_copy.html',{'weights':weights,'product1':product1,'user':getuser(request),'data':data,'price':price2,'type':types(request)})
+    # print(request.session['weight'])
+    return render(request,'product_copy.html',{'weights':weights,'product1':product1,'user':getuser(request),'data':data,'price':price2,'type':types(request),'selected':selected})
 
 
-# def products1(req,pk,pk1):
+def products1(req,pk,pk1):
+    print(req.session['weight'])
+    req.session['weight']=pk1
+    return products(req,pk,pk1)
+
 
 
 def login(request):
@@ -166,8 +182,25 @@ def remove_address(request,pk):
         addreses.objects.get(pk=pk).delete()
         messages.WARNING(request, "Address Deleted Successfully!!")
     return redirect(address)   
-def cart(request):
-     return render(request,'cart.html')
+
+
+
+
+
+
+
+def cart(request,pk):
+    print(request.session['weight'])
+    print('Product',pk)
+    data=cart_items.objects.create(p_name=product.objects.get(pk=pk),w_product=weight.objects.get(pk=request.session.get('weight')),quantity='1')
+    return render(request,'cart.html',{'type':types(request),'user':getuser(request)})
+
+
+
+
+
+
+
 
 def update_user(request):
     if 'user' in request.session:

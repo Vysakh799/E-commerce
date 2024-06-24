@@ -55,6 +55,7 @@ class contacts(models.Model):
     def __str__(self):
         return self.name
 class cart_items(models.Model):
+    # uname=models.ForeignKey(users,on_delete=models.CASCADE)
     p_name=models.ForeignKey(product,on_delete=models.CASCADE)
     w_product=models.ForeignKey(weight,on_delete=models.CASCADE)
     quantity=models.TextField()
