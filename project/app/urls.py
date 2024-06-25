@@ -20,4 +20,5 @@ urlpatterns = [
     path('update',views.update),
     path('update_password',views.update_password),
     path('contact',views.contact),
+    path('view_cart',views.view_cart),
 ]
