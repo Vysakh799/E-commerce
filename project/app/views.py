@@ -192,7 +192,7 @@ def remove_address(request,pk):
 def cart(request,pk):
     print(request.session['weight'])
     print('Product',pk)
-    data=cart_items.objects.create(u_name=request.session.get('user'),p_name=product.objects.get(pk=pk),w_product=weight.objects.get(pk=request.session.get('weight')),quantity='1')
+    data=cart_item.objects.create(uname=request.session.get('user'),p_name=product.objects.get(pk=pk),w_product=weight.objects.get(pk=request.session.get('weight')),quantity='1')
     return redirect(view_cart)
 
 def view_cart(request):
