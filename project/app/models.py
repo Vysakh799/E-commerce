@@ -17,8 +17,8 @@ class product(models.Model):
 
 class weight(models.Model):
     p_name=models.ForeignKey(product,on_delete=models.CASCADE)
-    price=models.TextField()
-    offer_price=models.TextField()
+    price=models.IntegerField()
+    offer_price=models.IntegerField()
     weight=models.TextField(null=True)
 
     def __str__(self):
@@ -59,4 +59,15 @@ class cart_item(models.Model):
     p_name=models.ForeignKey(product,on_delete=models.CASCADE)
     w_product=models.ForeignKey(weight,on_delete=models.CASCADE)
     quantity=models.IntegerField()
-    
+
+class orders(models.Model):
+    c_item=models.ForeignKey(cart_item,on_delete=models.CASCADE)
+    address_item=models.ForeignKey(addreses,on_delete=models.CASCADE,null=True)
+    payment=models.TextField(null=True)
+    packed=models.BooleanField(default=False)
+    shipped=models.BooleanField(default=False)
+    outfordelivery=models.BooleanField(default=False)
+    delivered=models.BooleanField(default=False)
+    ordered_date=models.DateField(null=True)
+    expected_date=models.DateField(null=True)
+

@@ -56,7 +56,7 @@
 								 aria-expanded="false">Shop</a>
 								<ul class="dropdown-menu">
 									{% for i in type %}
-									<li class="nav-item"><a class="nav-link" href="catagory/{{i}}">{{i}}</a></li>
+									<li class="nav-item"><a class="nav-link" href="../catagory/{{i}}">{{i}}</a></li>
 									{% endfor %}
 								</ul>
 							</li>
@@ -127,6 +127,18 @@
     <!--================Cart Area =================-->
     <section class="cart_area">
         <div class="container">
+            <!-- {% if messages %}
+            {% for message in messages %}
+
+            <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+                <strong>{{ message }}</strong> 
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              {% endfor %}
+
+              {% endif %} -->
             <div class="cart_inner">
                 <div class="table-responsive">
                     <table class="table">
@@ -139,34 +151,49 @@
                             </tr>
                         </thead>
                         <tbody>
+                            {% for i in data %}
                             <tr>
+
+                                
                                 <td>
                                     <div class="media">
                                         <div class="d-flex">
-                                            <img src="{% static 'img/cart.jpg' %}" alt="">
+                                            <img src="{{i.p_name.image1.url}}" alt="" style="height: 200px;">
                                         </div>
                                         <div class="media-body">
-                                            <p>Minimalistic shop for multipurpose use</p>
+                                            <p>{{i.p_name.name}} |{% if i.w_product.weight == 'null' %} {% else %} {{i.w_product.weight}}{% endif %}</p>
                                         </div>
                                     </div>
                                 </td>
                                 <td>
-                                    <h5>$360.00</h5>
+                                    <h5>₹{{i.w_product.offer_price}}</h5>
                                 </td>
                                 <td>
-                                    <div class="product_count">
-                                        <a href="" class="btn btn-warning">+</a>
-                                        <input type="text" name="pro_count" id="" value="1" style="width: 35px; padding-left: 10px; border-color: orange;">
-                                        <a href="" class="btn btn-warning">-</a>
+                                    <div class="product_count" >
+                                        <a href="../decri_count/{{i.pk}}" class="btn btn-warning">-</a>
+                                        <input type="text" name="pro_count"  id="pro_count" value="{{i.quantity}}" style="width: 35px; padding-left: 10px; border-color: orange;">
+                                        <a href="../incri_count/{{i.pk}}" class="btn btn-warning" >+</a>
+                                        
                                     </div>
                                 </td>
                                 <td>
-                                    <h5>$720.00</h5>
+                                    
+                                    <h5>{% for j in price %} {% if i.pk == j.id %}
+                                        ₹{{j.price}}
+
+                                        {% endif %}
+                                        {% endfor %}
+                                    </h5>
                                 </td>
                                 <td>
-                                    <a href="" class="btn btn-warning">Buy Now</a>
+                                    <a href="../order_address/{{i.pk}}" class="btn btn-warning">Buy Now</a>
                                 </td>
+                                <td>
+                                    <a href="../delete_item/{{i.pk}}" style="color: orange; font-size: 20px;"><i class="bi bi-trash"></i></a>
+                                </td>
+                                
                             </tr>
+                            {% endfor %}
                             <!-- <tr class="bottom_button">
                                 <td>
                                     <a class="gray_btn" href="#">Update Cart</a>
@@ -196,7 +223,7 @@
                                     <h5>Subtotal</h5>
                                 </td>
                                 <td>
-                                    <h5>$2160.00</h5>
+                                    <h5>₹{{total}}</h5>
                                 </td>
                             </tr>
                             <!-- <tr class="shipping_area">
@@ -259,70 +286,26 @@
     <!--================End Cart Area =================-->
 
     <!-- start footer Area -->
-    <footer class="footer-area section_gap">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3  col-md-6 col-sm-6">
-                    <div class="single-footer-widget">
-                        <h6>About Us</h6>
+    <footer class="footer-area section_gap"  style="width: 100%;">
+        <div class="container" >
+            <div class="row" style="display: block; text-align: center;">
+                <div class="col-lg-12  col-md-6 col-sm-6" 
+                    <div class="single-footer-widget" style="width: 100%;">
+                        <h6>UNIVERSAL : Equip Yourself & Train with Us!</h6>
                         <p>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
-                            ut labore dolore
-                            magna aliqua.
+                            
+
+We provide a complete fitness solution: top-quality gym equipment for your home workouts and a supportive training center with expert-led classes and personalized sessions.
+
+Empower your fitness journey. Shop smart, train strong.
                         </p>
                     </div>
                 </div>
-                <div class="col-lg-4  col-md-6 col-sm-6">
-                    <div class="single-footer-widget">
-                        <h6>Newsletter</h6>
-                        <p>Stay update with our latest</p>
-                        <div class="" id="mc_embed_signup">
-
-                            <form target="_blank" novalidate="true" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
-                                method="get" class="form-inline">
-
-                                <div class="d-flex flex-row">
-
-                                    <input class="form-control" name="EMAIL" placeholder="Enter Email" onfocus="this.placeholder = ''"
-                                        onblur="this.placeholder = 'Enter Email '" required="" type="email">
-
-
-                                    <button class="click-btn btn btn-default"><i class="fa fa-long-arrow-right"
-                                            aria-hidden="true"></i></button>
-                                    <div style="position: absolute; left: -5000px;">
-                                        <input name="b_36c4fd991d266f23781ded980_aefe40901a" tabindex="-1" value=""
-                                            type="text">
-                                    </div>
-
-                                    <!-- <div class="col-lg-4 col-md-4">
-													<button class="bb-btn btn"><span class="lnr lnr-arrow-right"></span></button>
-												</div>  -->
-                                </div>
-                                <div class="info"></div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3  col-md-6 col-sm-6">
-                    <div class="single-footer-widget mail-chimp">
-                        <h6 class="mb-20">Instragram Feed</h6>
-                        <ul class="instafeed d-flex flex-wrap">
-                            <li><img src="{% static 'img/i1.jpg' %}" alt=""></li>
-                            <li><img src="{% static 'img/i2.jpg' %}" alt=""></li>
-                            <li><img src="{% static 'img/i3.jpg' %}" alt=""></li>
-                            <li><img src="{% static 'img/i4.jpg' %}" alt=""></li>
-                            <li><img src="{% static 'img/i5.jpg' %}" alt=""></li>
-                            <li><img src="{% static 'img/i6.jpg' %}" alt=""></li>
-                            <li><img src="{% static 'img/i7.jpg' %}" alt=""></li>
-                            <li><img src="{% static 'img/i8.jpg' %}" alt=""></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-6 col-sm-6">
-                    <div class="single-footer-widget">
-                        <h6>Follow Us</h6>
-                        <p>Let us be social</p>
-                        <div class="footer-social d-flex align-items-center">
+                </div> 
+                <div class="col-lg-12 col-md-6 col-sm-6">
+                    <div class="single-footer-widget" style="text-align: center;">
+                        
+                        <div class="footer-social d-flex justify-content-center"  style="font-size: 19px;">
                             <a href="#"><i class="fa fa-facebook"></i></a>
                             <a href="#"><i class="fa fa-twitter"></i></a>
                             <a href="#"><i class="fa fa-dribbble"></i></a>
@@ -330,12 +313,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="footer-bottom d-flex justify-content-center align-items-center flex-wrap">
-                <p class="footer-text m-0"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-</p>
             </div>
         </div>
     </footer>
@@ -355,6 +332,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
 	<script src="{% static 'js/gmaps.min.js' %}"></script>
 	<script src="{% static 'js/main.js' %}"></script>
+
 </body>
 
 </html>

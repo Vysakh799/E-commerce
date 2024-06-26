@@ -30,12 +30,17 @@
 	<link rel="stylesheet" href="{% static 'css/ion.rangeSlider.css' %}">
 	<link rel="stylesheet" href="{% static 'css/ion.rangeSlider.skinFlat.css' %}"">
 	<link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
-	<link rel="stylesheet" href="{% static 'css/main_copy.css' %}">
+	<link rel="stylesheet" href="{% static 'css/main_copy.css' %}">	
+	 <!-- <link rel="stylesheet" href="../static/css/main_copy.css"> -->
 	<link rel="stylesheet" href="{% static 'css/product_copy_copy.css' %}">
 	<!-- Option 1: Include in HTML -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-
+	<style>
+		.address{
+			border: 2px solid rgb(187, 180, 180); border-radius: 20px; transition: ease 0.4s; flex-direction: column;
+		}
+	</style>
 
 
 	<script src="{% static 'js/vendor/jquery-2.2.4.min.js' %}"></script>
@@ -53,34 +58,11 @@
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
 	<script src="{% static 'js/gmaps.min.js' %}"></script>
 	<script src="{% static 'js/main.js' %}"></script>
-
-
-
-
-	<script>
-		$(document).ready(function(){
-		  $("#p1").click(function(){
-			$("#im1").show();
-			$("#im2,#im3,#im4").hide();
-		  });
-		  $("#p2").click(function(){
-			$("#im2").show();
-			$("#im1,#im3,#im4").hide();
-		  });
-		  $("#p3").click(function(){
-			$("#im3").show();
-			$("#im1,#im2,#im4").hide();
-		  });
-		  $("#p4").click(function(){
-			$("#im4").show();
-			$("#im1,#im3,#im2").hide();
-		  });
-		});
-	</script>
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
 
 </head>
 
-<body>
+<body style="height: fit-content;">
 
 	<!-- Start Header Area -->
 	<header class="header_area sticky-header">
@@ -98,13 +80,13 @@
 					<!-- Collect the nav links, forms, and other content for toggling -->
 					<div class="collapse navbar-collapse offset" id="navbarSupportedContent">
 						<ul class="nav navbar-nav menu_nav ml-auto">
-							<li class="nav-item active"><a class="nav-link" href="../">Home</a></li>
+							<li class="nav-item"><a class="nav-link" href="../">Home</a></li>
 							<li class="nav-item submenu dropdown">
 								<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
 								 aria-expanded="false">Shop</a>
 								<ul class="dropdown-menu">
 									{% for i in type %}
-									<li class="nav-item"><a class="nav-link" href="../catagory/{{i}}">{{i}}</a></li>
+									<li class="nav-item"><a class="nav-link" href="catagory/{{i}}">{{i}}</a></li>
 									{% endfor %}
 								</ul>
 							</li>
@@ -127,7 +109,7 @@
 								<button class="search mt-2" id="index-button" style="border: 1px solid white; background-color: white;"><i class="bi bi-search" id="search" style="font-size: 15px;"></i></button>
 							</li>
 							{% if user %}
-							<li class="nav-item submenu dropdown">
+							<li class="nav-item submenu dropdown active">
 								<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
 								 aria-expanded="false"><i class="bi bi-person-circle" style="font-size: 18px;"></i></a>
 								<ul class="dropdown-menu">
@@ -154,118 +136,68 @@
 			</div>
 		</div>
 	</header>
-	<div class="container row " style="margin-top: 200px; margin-left: 10%;" >
-		<div class="col-lg-1"></div>
-		<div class="part1 col-lg-2 col-sm-4">
-			<div class="photo1" style="width:50%;">
-				<img src="{{product1.image1.url}}" alt="" id="p1" width="100%">
-			</div>
-			<div class="photo2" style="width:50%;" >
-				<img src="{{product1.image2.url}}" alt="" id="p2" width="100%">
-			</div>
-			<div class="photo3" style="width:50%;">
-				<img src="{{product1.image3.url}}" alt="" id="p3" width="100%">
-			</div>
-			<div class="photo4" style="width:50%;">
-				<img src="{{product1.image4.url}}" alt="" id="p4" width="100%">
-			</div>
-		</div>
-		<div class="part2 col-lg-5 col-sm-4">
-			<div class="image1">
-				<img src="{{product1.image1.url}}" alt="" id="im1" width="80%">
-			</div>
-			<div class="image2">
-				<img src="{{product1.image2.url}}" alt="" id="im2"style="display: none;" width="80%">
-			</div>
-			<div class="image3">
-				<img src="{{product1.image3.url}}" alt="" id="im3" style="display: none;" width="80%" >
-			</div>
-			<div class="image4">
-				<img src="{{product1.image4.url}}" alt="" id="im4" style="display: none;" width="80%">
-			</div>
-		</div>
-		<div class="part3 col-lg-4 col-sm-4">
-			<h4>{{product1.description}}</h4>
-			<div class="ratting">
-				<p>4.6/5</p>
-			</div>
-			<div class="location">
-				<div class="location-logo" style="font-size: 15px;">
-					<i class="bi bi-geo-alt"></i>
-				</div>
-				<p>location</p>
-			</div>
-			<div class="weight-price">
-				{% for i in weights %}
-				<a href="../../products1/{{product1.pk}}/{{i.pk}}">
-				<div class="weight1" {% if selected is i.pk %} style="border: 1px solid black;" {% endif %}>
-					<p id="weight">{{i.weight}}</p>
-					<p class="offerprice">₹{{i.price}}</p>
-					<p style="color: black;">₹{{i.offer_price}}</p>
-				</div>
-			    </a>
-				{% endfor %}
-			</div>
-			<div class="buttons">
-				<div class="button1">
-					<a href="../../add_cart/{{product1.pk}}" class="btn " style="width: 100%;">Add to cart</a>
-				</div>
-				<div class="button2">
-					<a href="" class="btn " style="width: 100%; margin-top: 15px;">Buy Now</a>
-				</div>
-			</div>
-		</div>
-
-
-	</div>
-	<div class="alsolike container" style="margin-top: 150px;">
-		<div class="head">
-			<p style="font-size: 23px; font-weight: 600; color: black;">You Might also like</p>
-		</div>
-		<div class="alsopro row mt-5">
-			{% for k in price %}
-				{% if k.p_name.name != product1.name %}
-					<a href="../../products/{{k.p_name.pk}}">
-						<div class="col-lg-3 col-md-6">
-							<div class="single-product">
-								<img class="img-fluid" src="{{k.p_name.image1.url}}" alt="" height="250px">
-								<div class="product-details">
-									<h6>{{k.p_name.name}}</h6>
-									<div class="price">
-									
-										<h6>₹{{k.offer_price}}</h6>
-										<h6 class="l-through">₹{{k.price}}</h6>
-									
-									</div>
-									<div class="prd-bottom">
 	
-										<a href="" class="social-info">
-											<span class="ti-bag"></span>
-											<p class="hover-text">add to bag</p>
-										</a>
-										<a href="" class="social-info">
-											<span class="lnr lnr-heart"></span>
-											<p class="hover-text">Wishlist</p>
-										</a>
-										<a href="" class="social-info">
-											<span class="lnr lnr-sync"></span>
-											<p class="hover-text">compare</p>
-										</a>
-										<a href="" class="social-info">
-											<span class="lnr lnr-move"></span>
-											<p class="hover-text">view more</p>
-										</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</a>
-					{% endif %}
-					{% endfor %}
+
+    
+	<div class="container">
+        <a href="../cart">
+			<div class="col-lg-3" style="margin-top: 180px; color: orange; ">
+				<i class="bi bi-box-arrow-left" style="font-size: 25px;"></i> Go back
+			</div>
+		</a>
+		<div class="col-lg-12">
+			{% if messages %}
+						{% for message in messages %}
+
+						<div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+							<strong>{{ message }}</strong> 
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							  <span aria-hidden="true">&times;</span>
+							</button>
+						  </div>
+						  {% endfor %}
+
+						  {% endif %}
 		</div>
-	</div>
+		<div class="services row justify-content-between p-5">
+			<a href="../add_address" class="col-lg-4 row ">
+				<div class="col-lg-12 p-3  mt-4 service" style="display: flex; justify-content: center; align-items: center; border: 2px solid rgb(187, 180, 180); border-radius: 20px; transition: ease 0.4s;">
+					<div class="col-lg-4 " >
+						<i class="bi bi-plus" style="font-size: 55px; color: orange;" ></i>
+					</div>
+				</div>
+			</a>
+			{% for i in adr %}
+			<a href="../order_address1/{{i.pk}}" style="color: grey;">
+				<div class="col-lg-4 row p-3 mt-4 service ad address" {% if selected is i.pk %} style="border: 2px solid black;" {% endif %} >
+					<h4>{{i.fullname}}</h4>
+					<p>{{i.add1}} {{i.add2}}<br>
+					{{i.landmark}}<br>
+					Phno: {{i.mobilenumber}}<br>
+					{{i.pincode}} |
+					{{i.state}} |
+					{{i.region}}</p>
+					<div class="col-lg-2" style="display: flex;">
+						<a href="../update_address/{{i.pk}}">Edit</a>
+						<p>&nbsp;|</p>
+						<a href="../remove_address/{{i.pk}}">&nbsp;Remove</a>
+					</div>
+				</div>
+			</a>	
+			{% endfor %}
+			
+			<div class="col-lg-4 row p-3 ">		
+			</div>
+			
+		</div>
+		<div class="col-lg-12" style="display: flex; justify-content: flex-end;">
+			<a href="../add_address_order/{{data2}}" class="btn btn-warning">Proceed</a>
+			
+		</div>
+    </div>
+
 		<!-- start footer Area -->
-		<footer class="footer-area section_gap"  style="width: 100%;">
+		<footer class="footer-area section_gap"  style="width: 100%; margin-top:83px ;">
 			<div class="container" >
 				<div class="row" style="display: block; text-align: center;">
 					<div class="col-lg-12  col-md-6 col-sm-6" 
@@ -296,6 +228,8 @@
 			</div>
 		</footer>
 		<!-- End footer Area -->
+
+
 
 	
 </body>

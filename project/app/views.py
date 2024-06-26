@@ -3,6 +3,8 @@ from.models import *
 from django.contrib import messages
 from django.conf import settings
 from django.core.mail import send_mail
+from django.utils import timezone
+from datetime import datetime, timedelta
 
 def getuser(request):
     user=False
@@ -49,13 +51,13 @@ def products(request,pk,pk1=None):
     # print(weights1)
     if pk1:
         selected=int(pk1)
-        print(request.session['weight'],'pk1',type(pk1))
+        # print(request.session['weight'],'pk1',type(pk1))
 
     else:
         for i in weights[:1]:
             request.session['weight']=str(i.pk)
             selected=i.pk
-        print('pk2')
+        # print('pk2')
     data=product.objects.filter(type=product1.type)
     price=weight.objects.all()
     price2=filter(data,price)
@@ -64,7 +66,7 @@ def products(request,pk,pk1=None):
 
 
 def products1(req,pk,pk1):
-    print(req.session['weight'])
+    # print(req.session['weight'])
     req.session['weight']=pk1
     return products(req,pk,pk1)
 
@@ -189,16 +191,79 @@ def remove_address(request,pk):
 
 
 
+
 def cart(request,pk):
+    user_data=users.objects.get(username=request.session.get('user'))
     print(request.session['weight'])
     print('Product',pk)
-    data=cart_item.objects.create(uname=request.session.get('user'),p_name=product.objects.get(pk=pk),w_product=weight.objects.get(pk=request.session.get('weight')),quantity='1')
+    data=cart_item.objects.create(uname=user_data,p_name=product.objects.get(pk=pk),w_product=weight.objects.get(pk=request.session.get('weight')),quantity='1')
     return redirect(view_cart)
 
 def view_cart(request):
-    return render(request,'cart.html',{'type':types(request),'user':getuser(request)})
+    user_data=users.objects.get(username=request.session.get('user'))
+    data=cart_item.objects.filter(uname=user_data)
+    price=[]
+    total=0
+    for i in data:
+        of_p=i.w_product.offer_price
+        count=i.quantity
+        price.append({'id':i.pk,'price':of_p*count})
+        total+=of_p*count
 
+    return render(request,'cart.html',{'type':types(request),'user':getuser(request),'data':data,'price':price,'total':total})
 
+def delete_item(request,pk):
+    cart_item.objects.get(pk=pk).delete()
+    # messages.WARNING(request, "Cart Item Deleted Successfully!!")
+    return redirect(view_cart)
+def incri_count(request,pk):
+    prod=cart_item.objects.get(pk=pk)
+    count=prod.quantity
+    count+=1
+    data=cart_item.objects.filter(pk=pk).update(quantity=count)
+    return redirect(view_cart)
+def decri_count(request,pk):
+    prod=cart_item.objects.get(pk=pk)
+    count=prod.quantity
+    if count==1:
+        pass
+    else:
+        count-=1
+    data=cart_item.objects.filter(pk=pk).update(quantity=count)
+    return redirect(view_cart)
+
+def order_address(request,pk1,pk=None):
+    data=users.objects.get(username=request.session.get('user'))
+    adr=addreses.objects.filter(u_name=data.pk)
+    data2=pk1
+    selected=0
+    if pk:
+        selected=int(pk)
+    else:
+        for i in adr:
+            request.session['address']=i.pk
+            selected=i.pk
+    return render(request,'order_address.html',{'type':types(request),'user':getuser(request),'customer':data,'adr':adr,'selected':selected,'data2':data2})
+
+def order_address1(request,pk):
+    request.session['address']=pk
+    return order_address(request,pk)
+
+def add_address_order(request,data2):
+    item=cart_item.objects.get(pk=data2)
+    x=datetime.now()
+    date=(x.strftime("%x"))
+    date_string = date
+    parts = date_string.split("/")
+    year = "20" + parts[2]
+    formatted_date = f"{year}-{parts[0]}-{parts[1]}"
+    date_obj = datetime.strptime(formatted_date, "%Y-%m-%d")
+    expected = date_obj + timedelta(days=7)
+    expected_date=expected.date()
+    adr_item=addreses.objects.get(pk=request.session.get('address'))
+    data=orders.objects.create(c_item=item,address_item=adr_item,ordered_date=formatted_date,expected_date=expected_date)
+    data.save()
+    return redirect(view_cart)
 
 
 
