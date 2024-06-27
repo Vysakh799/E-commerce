@@ -113,10 +113,11 @@
         <div class="container">
             <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
                 <div class="col-first">
-                    <h1>Shopping Cart</h1>
+                    <h1>Track Your Orderes</h1>
                     <nav class="d-flex align-items-center">
-                        <a href="../">Home<span class="lnr lnr-arrow-right"></span></a>
-                        <a href="../cart">Cart</a>
+                        <a href="../user">Profile<span class="lnr lnr-arrow-right"></span></a>
+                        <a href="../yourorders">Your Orders<span class="lnr lnr-arrow-right"></span></a>
+                        <a href="../ordered_products">Track Order</a>
                     </nav>
                 </div>
             </div>
@@ -127,7 +128,7 @@
     <!--================Cart Area =================-->
     <section class="cart_area">
         <div class="container">
-            {% if messages %}
+            <!-- {% if messages %}
             {% for message in messages %}
 
             <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
@@ -138,77 +139,51 @@
               </div>
               {% endfor %}
 
-              {% endif %}
+              {% endif %} -->
             <div class="cart_inner">
                 <div class="table-responsive">
                     <table class="table">
                         <thead>
                             <tr>
                                 <th scope="col">Product</th>
-                                <th scope="col">Price</th>
-                                <th scope="col">Quantity</th>
-                                <th scope="col">Total</th>
+                                <th scope="col">Cost</th>
+                                <th scope="col">Track</th>
+                                <th scope="col"></th>
                             </tr>
                         </thead>
                         <tbody>
-                            {% for i in data %}
+                            {% for i in oritem %}
+                            {% for j in i %}
                             <tr>
 
                                 
                                 <td>
                                     <div class="media">
                                         <div class="d-flex">
-                                            <img src="{{i.p_name.image1.url}}" alt="" style="height: 200px;">
+                                            <img src="{{j.c_item.p_name.image1.url}}" alt="" style="height: 200px;">
                                         </div>
                                         <div class="media-body">
-                                            <p>{{i.p_name.name}} |{% if i.w_product.weight == 'null' %} {% else %} {{i.w_product.weight}}{% endif %}</p>
+                                            <p>{{j.c_item.p_name.name}} {% if j.c_item.w_product.weight == 'null' %} {% else %} | {{j.c_item.w_product.weight}}{% endif %}</p>
                                         </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <h5>₹{{i.w_product.offer_price}}</h5>
-                                </td>
-                                <td>
-                                    <div class="product_count" >
-                                        <a href="../decri_count/{{i.pk}}" class="btn btn-warning">-</a>
-                                        <input type="text" name="pro_count"  id="pro_count" value="{{i.quantity}}" style="width: 35px; padding-left: 10px; border-color: orange;">
-                                        <a href="../incri_count/{{i.pk}}" class="btn btn-warning" >+</a>
-                                        
                                     </div>
                                 </td>
                                 <td>
                                     
-                                    <h5>{% for j in price %} {% if i.pk == j.id %}
-                                        ₹{{j.price}}
+                                    <h5>{% for k in price %} {% if j.c_item.pk == k.id %}
+                                        ₹{{k.price}}
 
                                         {% endif %}
                                         {% endfor %}
                                     </h5>
                                 </td>
                                 <td>
-                                    <a href="../order_address/{{i.pk}}" class="btn btn-warning">Buy Now</a>
-                                </td>
-                                <td>
-                                    <a href="../delete_item/{{i.pk}}" style="color: orange; font-size: 20px;"><i class="bi bi-trash"></i></a>
+                                    <a href="../track_order/{{j.pk}}" class="btn btn-warning">Track</a>
                                 </td>
                                 
                             </tr>
                             {% endfor %}
-
-                            <tr>
-                                <td>
-
-                                </td>
-                                <td>
-
-                                </td>
-                                <td>
-                                    <h5>Subtotal</h5>
-                                </td>
-                                <td>
-                                    <h5>₹{{total}}</h5>
-                                </td>
-                            </tr>
+                            {% endfor %}
+                            
                         </tbody>
                     </table>
                 </div>

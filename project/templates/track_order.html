@@ -31,7 +31,11 @@
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
 </head>
-
+<style>
+    input[type="checkbox"]:checked::after{
+        background-color: orange;
+    }
+</style>
 <body>
 
     <!-- Start Header Area -->
@@ -113,10 +117,11 @@
         <div class="container">
             <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
                 <div class="col-first">
-                    <h1>Shopping Cart</h1>
+                    <h1>Track Your Orderes</h1>
                     <nav class="d-flex align-items-center">
-                        <a href="../">Home<span class="lnr lnr-arrow-right"></span></a>
-                        <a href="../cart">Cart</a>
+                        <a href="../user">Profile<span class="lnr lnr-arrow-right"></span></a>
+                        <a href="../yourorders">Your Orders<span class="lnr lnr-arrow-right"></span></a>
+                        <a href="../ordered_products">Ordered Products</a>
                     </nav>
                 </div>
             </div>
@@ -124,101 +129,48 @@
     </section>
     <!-- End Banner Area -->
 
-    <!--================Cart Area =================-->
-    <section class="cart_area">
-        <div class="container">
-            {% if messages %}
-            {% for message in messages %}
-
-            <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
-                <strong>{{ message }}</strong> 
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              {% endfor %}
-
-              {% endif %}
-            <div class="cart_inner">
-                <div class="table-responsive">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">Product</th>
-                                <th scope="col">Price</th>
-                                <th scope="col">Quantity</th>
-                                <th scope="col">Total</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for i in data %}
-                            <tr>
-
-                                
-                                <td>
-                                    <div class="media">
-                                        <div class="d-flex">
-                                            <img src="{{i.p_name.image1.url}}" alt="" style="height: 200px;">
-                                        </div>
-                                        <div class="media-body">
-                                            <p>{{i.p_name.name}} |{% if i.w_product.weight == 'null' %} {% else %} {{i.w_product.weight}}{% endif %}</p>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <h5>₹{{i.w_product.offer_price}}</h5>
-                                </td>
-                                <td>
-                                    <div class="product_count" >
-                                        <a href="../decri_count/{{i.pk}}" class="btn btn-warning">-</a>
-                                        <input type="text" name="pro_count"  id="pro_count" value="{{i.quantity}}" style="width: 35px; padding-left: 10px; border-color: orange;">
-                                        <a href="../incri_count/{{i.pk}}" class="btn btn-warning" >+</a>
-                                        
-                                    </div>
-                                </td>
-                                <td>
-                                    
-                                    <h5>{% for j in price %} {% if i.pk == j.id %}
-                                        ₹{{j.price}}
-
-                                        {% endif %}
-                                        {% endfor %}
-                                    </h5>
-                                </td>
-                                <td>
-                                    <a href="../order_address/{{i.pk}}" class="btn btn-warning">Buy Now</a>
-                                </td>
-                                <td>
-                                    <a href="../delete_item/{{i.pk}}" style="color: orange; font-size: 20px;"><i class="bi bi-trash"></i></a>
-                                </td>
-                                
-                            </tr>
-                            {% endfor %}
-
-                            <tr>
-                                <td>
-
-                                </td>
-                                <td>
-
-                                </td>
-                                <td>
-                                    <h5>Subtotal</h5>
-                                </td>
-                                <td>
-                                    <h5>₹{{total}}</h5>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+    <div class="container mt-5" style="display: flex;">
+        <div class="slide col-lg-4">
+            <div class="col-lg-2" style="display: flex;"> 
+                <input type="checkbox" name="orderplaced" checked>
+                &nbsp;<span style="color: black; font-weight: 500;">OrderPlaced</span>
+            </div>
+            <div class="col-lg-2" style="border-left: 4px solid rgb(34, 129, 232);height: 50px; margin-left: 20px; margin-top: -6px;"></div>
+            <div class="col-lg-2" style="display: flex; margin-top: -5px;">
+                <input type="checkbox" name="orderplaced">
+                &nbsp;<span style="color: black; font-weight: 500;">Packed</span>
+            </div>
+            <div class="col-lg-2" style="border-left: 4px solid rgb(34, 129, 232);height: 50px; margin-left: 20px; margin-top: -6px;"></div>
+            <div class="col-lg-2" style="display: flex; margin-top: -5px;">
+                <input type="checkbox" name="orderplaced">
+                &nbsp;<span style="color: black; font-weight: 500;">Shipped</span>
+            </div>
+            <div class="col-lg-2" style="border-left: 4px solid rgb(34, 129, 232);height: 50px; margin-left: 20px; margin-top: -6px;"></div>
+            <div class="col-lg-2" style="display: flex; margin-top: -5px;">
+                <input type="checkbox" name="orderplaced">
+                &nbsp;<span style="color: black; font-weight: 500;">OutForDevilvery</span>
+            </div>
+            <div class="col-lg-2" style="border-left: 4px solid rgb(34, 129, 232);height: 50px; margin-left: 20px; margin-top: -6px;"></div>
+            <div class="col-lg-2" style="display: flex; margin-top: -5px;">
+                <input type="checkbox" name="orderplaced">
+                &nbsp;<span style="color: black; font-weight: 500;">Delivered</span>
             </div>
         </div>
-    </section>
-    <!--================End Cart Area =================-->
+        <div class="details row" style="display: flex; flex-direction: column;">
+            <div class="col-lg-4" >
+                <p style="font-size: 20px; color: black; font-weight: 500;">{{order.c_item.p_name.name}}</p>
+                
+                <p>{% if order.c_item.w_product.weight == 'null' %} {% else %} {{order.c_item.w_product.weight}} {% endif %}</p>
+                <p style="color: grey; font-style: italic;">Expected On : {{order.expected_date}}</p>
+            </div>
+            <div class="col-lg-12">
+                <img src="{{order.c_item.p_name.image1.url}}" alt="" class="col-lg-6">
+            </div>
+        </div>
+    </div>
 
     <!-- start footer Area -->
-    <footer class="footer-area section_gap"  style="width: 100%;">
+    <footer class="footer-area section_gap mt-3"  style="width: 100%;">
         <div class="container" >
             <div class="row" style="display: block; text-align: center;">
                 <div class="col-lg-12  col-md-6 col-sm-6" 

@@ -42,4 +42,7 @@ urlpatterns = [
 
     #order
     path('add_address_order/<data2>',views.add_address_order),
+    path('track_order/<pk>',views.track_order),
+    path('ordered_products',views.ordered_products),
+    path('return_product',views.return_product),
 ]

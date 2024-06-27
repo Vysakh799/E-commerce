@@ -113,10 +113,12 @@
         <div class="container">
             <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
                 <div class="col-first">
-                    <h1>Shopping Cart</h1>
-                    <nav class="d-flex align-items-center">
-                        <a href="../">Home<span class="lnr lnr-arrow-right"></span></a>
-                        <a href="../cart">Cart</a>
+                    <h1>Return Products</h1>
+                    <p style="margin-top: -10px;"> You may return products within 7 days from the date of delivery</p>
+                    <nav class="d-flex align-items-center" style="margin-top: 5px;">
+                        <a href="../user">Profile<span class="lnr lnr-arrow-right"></span></a>
+                        <a href="../yourorders">Your Orders<span class="lnr lnr-arrow-right"></span></a>
+                        <a href="../return_product">Return Products</a>
                     </nav>
                 </div>
             </div>
@@ -127,7 +129,7 @@
     <!--================Cart Area =================-->
     <section class="cart_area">
         <div class="container">
-            {% if messages %}
+            <!-- {% if messages %}
             {% for message in messages %}
 
             <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
@@ -138,16 +140,16 @@
               </div>
               {% endfor %}
 
-              {% endif %}
+              {% endif %} -->
             <div class="cart_inner">
                 <div class="table-responsive">
                     <table class="table">
                         <thead>
                             <tr>
                                 <th scope="col">Product</th>
-                                <th scope="col">Price</th>
-                                <th scope="col">Quantity</th>
-                                <th scope="col">Total</th>
+                                <th scope="col"></th>
+                                <th scope="col"></th>   
+                                <th scope="col">Return</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -194,7 +196,6 @@
                                 
                             </tr>
                             {% endfor %}
-
                             <tr>
                                 <td>
 

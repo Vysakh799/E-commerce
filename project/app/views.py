@@ -182,7 +182,7 @@ def update_address(request,pk):
 def remove_address(request,pk):
     if 'user' in request.session:
         addreses.objects.get(pk=pk).delete()
-        messages.WARNING(request, "Address Deleted Successfully!!")
+        messages.warning(request, "Address Deleted Successfully!!")
     return redirect(address)   
 
 
@@ -214,7 +214,7 @@ def view_cart(request):
 
 def delete_item(request,pk):
     cart_item.objects.get(pk=pk).delete()
-    # messages.WARNING(request, "Cart Item Deleted Successfully!!")
+    messages.warning(request, "Cart Item Deleted Successfully!!")
     return redirect(view_cart)
 def incri_count(request,pk):
     prod=cart_item.objects.get(pk=pk)
@@ -264,6 +264,33 @@ def add_address_order(request,data2):
     data=orders.objects.create(c_item=item,address_item=adr_item,ordered_date=formatted_date,expected_date=expected_date)
     data.save()
     return redirect(view_cart)
+
+def track_order(request,pk):
+    order=orders.objects.get(pk=pk)
+    return render(request,'track_order.html',{'order':order})
+
+
+def ordered_products(request):
+    username=request.session.get('user')
+    user1=users.objects.get(username=username)
+    cart_items=cart_item.objects.filter(uname=user1)
+    ordered_item=[]
+
+    for i in cart_items:
+        data1=orders.objects.filter(c_item=i.pk)
+        if data1:
+            ordered_item.append(data1)
+    price=[]
+    for i in cart_items:
+        of_p=i.w_product.offer_price
+        count=i.quantity
+        price.append({'id':i.pk,'price':of_p*count})
+    print(ordered_item)
+    return render(request,'ordered_products.html',{'oritem':ordered_item,'price':price})
+
+def return_product(request):
+    return render(request,'return_product.html')
+
 
 
 
