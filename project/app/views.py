@@ -197,6 +197,7 @@ def cart(request,pk):
     print(request.session['weight'])
     print('Product',pk)
     data=cart_item.objects.create(uname=user_data,p_name=product.objects.get(pk=pk),w_product=weight.objects.get(pk=request.session.get('weight')),quantity='1')
+    data.save()
     return redirect(view_cart)
 
 def view_cart(request):
@@ -265,9 +266,34 @@ def add_address_order(request,data2):
     data.save()
     return redirect(view_cart)
 
+def update_order_address(request,pk,data2):
+    if 'user' in request.session:
+        data=users.objects.get(username=request.session.get('user'))
+        data1=addreses.objects.get(pk=pk)
+        userdata=data
+        pk1=data2
+        if request.method=='POST':
+            region=request.POST['region']
+            fullname=request.POST['fullname']
+            mobilenumber=request.POST['mobilenumber']
+            pincode=request.POST['pincode']
+            add1=request.POST['add1']
+            add2=request.POST['add2']
+            landmark=request.POST['landmark']
+            town=request.POST['town']
+            state=request.POST['state']
+            data4=addreses.objects.filter(pk=pk).update(region=region,fullname=fullname,mobilenumber=mobilenumber,pincode=pincode,add1=add1,add2=add2,landmark=landmark,town=town,state=state)
+            messages.success(request, "Address Successfully Updated!")
+            return order_address(request,pk1)
+        return render(request,'update_order_address.html',{'userdata':userdata})
+    else:
+         return redirect(login)
+
+
+
 def track_order(request,pk):
     order=orders.objects.get(pk=pk)
-    return render(request,'track_order.html',{'order':order})
+    return render(request,'track_order.html',{'type':types(request),'user':getuser(request),'order':order})
 
 
 def ordered_products(request):
@@ -286,10 +312,22 @@ def ordered_products(request):
         count=i.quantity
         price.append({'id':i.pk,'price':of_p*count})
     print(ordered_item)
-    return render(request,'ordered_products.html',{'oritem':ordered_item,'price':price})
+    return render(request,'ordered_products.html',{'type':types(request),'user':getuser(request),'oritem':ordered_item,'price':price})
 
 def return_product(request):
     return render(request,'return_product.html')
+
+
+def buynow(request,pk):
+    user_data=users.objects.get(username=request.session.get('user'))
+    # print(request.session['weight'])
+    # print('Product',pk)
+    data=cart_item.objects.create(uname=user_data,p_name=product.objects.get(pk=pk),w_product=weight.objects.get(pk=request.session.get('weight')),quantity='1')
+    pk1=data.pk
+    data.save()
+    return order_address(request,pk1)
+
+
 
 
 

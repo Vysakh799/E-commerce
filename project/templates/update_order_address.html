@@ -30,7 +30,8 @@
 	<link rel="stylesheet" href="{% static 'css/ion.rangeSlider.css' %}">
 	<link rel="stylesheet" href="{% static 'css/ion.rangeSlider.skinFlat.css' %}"">
 	<link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
-	<link rel="stylesheet" href="{% static 'css/main_copy.css' %}">
+	<link rel="stylesheet" href="{% static 'css/main_copy.css' %}">	
+	 <!-- <link rel="stylesheet" href="../static/css/main_copy.css"> -->
 	<link rel="stylesheet" href="{% static 'css/product_copy_copy.css' %}">
 	<!-- Option 1: Include in HTML -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -53,34 +54,15 @@
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
 	<script src="{% static 'js/gmaps.min.js' %}"></script>
 	<script src="{% static 'js/main.js' %}"></script>
-
-
-
-
-	<script>
-		$(document).ready(function(){
-		  $("#p1").click(function(){
-			$("#im1").show();
-			$("#im2,#im3,#im4").hide();
-		  });
-		  $("#p2").click(function(){
-			$("#im2").show();
-			$("#im1,#im3,#im4").hide();
-		  });
-		  $("#p3").click(function(){
-			$("#im3").show();
-			$("#im1,#im2,#im4").hide();
-		  });
-		  $("#p4").click(function(){
-			$("#im4").show();
-			$("#im1,#im3,#im2").hide();
-		  });
-		});
-	</script>
-
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+	<style>
+		input::placeholder{
+			font-size: 13px;
+		}
+	</style>
 </head>
 
-<body>
+<body style="height: fit-content;">
 
 	<!-- Start Header Area -->
 	<header class="header_area sticky-header">
@@ -98,13 +80,13 @@
 					<!-- Collect the nav links, forms, and other content for toggling -->
 					<div class="collapse navbar-collapse offset" id="navbarSupportedContent">
 						<ul class="nav navbar-nav menu_nav ml-auto">
-							<li class="nav-item active"><a class="nav-link" href="../">Home</a></li>
+							<li class="nav-item"><a class="nav-link" href="../">Home</a></li>
 							<li class="nav-item submenu dropdown">
 								<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
 								 aria-expanded="false">Shop</a>
 								<ul class="dropdown-menu">
 									{% for i in type %}
-									<li class="nav-item"><a class="nav-link" href="../catagory/{{i}}">{{i}}</a></li>
+									<li class="nav-item"><a class="nav-link" href="catagory/{{i}}">{{i}}</a></li>
 									{% endfor %}
 								</ul>
 							</li>
@@ -127,7 +109,7 @@
 								<button class="search mt-2" id="index-button" style="border: 1px solid white; background-color: white;"><i class="bi bi-search" id="search" style="font-size: 15px;"></i></button>
 							</li>
 							{% if user %}
-							<li class="nav-item submenu dropdown">
+							<li class="nav-item submenu dropdown active">
 								<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
 								 aria-expanded="false"><i class="bi bi-person-circle" style="font-size: 18px;"></i></a>
 								<ul class="dropdown-menu">
@@ -154,122 +136,80 @@
 			</div>
 		</div>
 	</header>
-	<div class="div d-flex justify-content-center aling-items-center">
-	<div class="container row" style="margin-top: 200px;" >
-		<div class="col-lg-1"></div>
-		<div class="images col-lg-7 d-flex">
-			<div class="part1 col-lg-3 col-sm-7">
-				<div class="photo1" style="width:50%;">
-					<img src="{{product1.image1.url}}" alt="" id="p1" width="100%">
-				</div>
-				<div class="photo2" style="width:50%;" >
-					<img src="{{product1.image2.url}}" alt="" id="p2" width="100%">
-				</div>
-				<div class="photo3" style="width:50%;">
-					<img src="{{product1.image3.url}}" alt="" id="p3" width="100%">
-				</div>
-				<div class="photo4" style="width:50%;">
-					<img src="{{product1.image4.url}}" alt="" id="p4" width="100%">
-				</div>
-			</div>
-			<div class="part2 col-lg-9">
-				<div class="image1">
-					<img src="{{product1.image1.url}}" alt="" id="im1" width="80%">
-				</div>
-				<div class="image2">
-					<img src="{{product1.image2.url}}" alt="" id="im2"style="display: none;" width="80%">
-				</div>
-				<div class="image3">
-					<img src="{{product1.image3.url}}" alt="" id="im3" style="display: none;" width="80%" >
-				</div>
-				<div class="image4">
-					<img src="{{product1.image4.url}}" alt="" id="im4" style="display: none;" width="80%">
-				</div>
-			</div>
-		</div>
-		<div class="part3 col-lg-4 col-sm-4">
-			<h4>{{product1.description}}</h4>
-			<div class="ratting">
-				<p>4.6/5</p>
-			</div>
-			<div class="location">
-				<div class="location-logo" style="font-size: 15px;">
-					<i class="bi bi-geo-alt"></i>
-				</div>
-				<p>location</p>
-			</div>
-			<div class="weight-price">
-				{% for i in weights %}
-				<a href="../../products1/{{product1.pk}}/{{i.pk}}">
-				<div class="weight1 ml-1" {% if selected is i.pk %} style="border: 1px solid black;" {% endif %}>
-					<p id="weight">{{i.weight}}</p>
-					<p class="offerprice">₹{{i.price}}</p>
-					<p style="color: black;">₹{{i.offer_price}}</p>
-				</div>
-			    </a>
-				{% endfor %}
-			</div>
-			<div class="buttons">
-				<div class="button1">
-					<a href="../../add_cart/{{product1.pk}}" class="btn " style="width: 100%;">Add to cart</a>
-				</div>
-				<div class="button2">
-					<a href="../../buynow/{{product1.pk}}" class="btn " style="width: 100%; margin-top: 15px;">Buy Now</a>
-				</div>
-			</div>
-		</div>
-
-
-	</div>
-	</div>
-	<div class="alsolike container" style="margin-top: 150px;">
-		<div class="head">
-			<p style="font-size: 23px; font-weight: 600; color: black;">You Might also like</p>
-		</div>
-		<div class="alsopro row mt-5">
-			{% for k in price %}
-				{% if k.p_name.name != product1.name %}
-					<a href="../../products/{{k.p_name.pk}}">
-						<div class="col-lg-3 col-md-6">
-							<div class="single-product">
-								<img class="img-fluid" src="{{k.p_name.image1.url}}" alt="" height="250px">
-								<div class="product-details">
-									<h6>{{k.p_name.name}}</h6>
-									<div class="price">
-									
-										<h6>₹{{k.offer_price}}</h6>
-										<h6 class="l-through">₹{{k.price}}</h6>
-									
-									</div>
-									<div class="prd-bottom">
 	
-										<a href="" class="social-info">
-											<span class="ti-bag"></span>
-											<p class="hover-text">add to bag</p>
-										</a>
-										<a href="" class="social-info">
-											<span class="lnr lnr-heart"></span>
-											<p class="hover-text">Wishlist</p>
-										</a>
-										<a href="" class="social-info">
-											<span class="lnr lnr-sync"></span>
-											<p class="hover-text">compare</p>
-										</a>
-										<a href="" class="social-info">
-											<span class="lnr lnr-move"></span>
-											<p class="hover-text">view more</p>
-										</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</a>
-					{% endif %}
-					{% endfor %}
-		</div>
+
+    <div class="container">
+		<a href="../address">
+			<div class="col-lg-3" style="margin-top: 180px; color: orange; ">
+				<i class="bi bi-box-arrow-left" style="font-size: 25px;"></i> Go back
+			</div>
+		</a>
 	</div>
+	<div class="container" style=" display: flex; margin-top: 25px;">
+
+			<div class="col-lg-6">
+				
+				<form action="../../update_order_address/{{userdata.pk}}" method="POST" class="form-group" style="display: flex; flex-direction: column; font-size: 15px;">
+					{% csrf_token %}
+					<div class="col-lg-12">
+						<select name="region" class="form-select">
+							<option value="India">India</option>
+							<option value="China">China</option>
+							<option value="Pakisthan">Pakisthan</option>
+							<option value="USA">USA</option>
+							<option value="Africa">Africa</option>
+						</select>
+					</div>
+					<div class="col-lg-12 mt-2">
+						<label for="fullname" style="font-weight: 500; color: black;">Fulllname (First name and Last name)</label>
+						<input type="text" name="fullname" id="" value="{{userdata.fullname}}" class="form-control" required>
+					</div>
+					<div class="col-lg-12 mt-1">
+						<label for="mobilenumber" style="font-weight: 500; color: black;">Mobile Number</label>
+						<input type="text" name="mobilenumber" id="" value="{{userdata.mobilenumber}}" class="form-control" required>
+						<p>May be used to assist delivery</p>
+					</div>
+					<div class="col-lg-12 mt-2">
+						<label for="pincode" style="font-weight: 500; color: black;">Pincode</label>
+						<input type="text" name="pincode" id="" value="{{userdata.pincode}}" class="form-control" required>
+					</div>
+					<div class="col-lg-12 mt-2">
+						<label for="add1" style="font-weight: 500; color: black;">Flat, Houseno.,Building, Company, Apartment</label>
+						<input type="text" name="add1" id="" class="form-control" value="{{userdata.add1}}" required>
+					</div>
+					<div class="col-lg-12 mt-2">
+						<label for="add2" style="font-weight: 500; color: black;">Area, Street, Sector, Village</label>
+						<input type="text" name="add2" id="" class="form-control" value="{{userdata.add2}}">
+					</div>
+					<div class="col-lg-12 mt-2">
+						<label for="landmark" style="font-weight: 500; color: black;">Landmark</label>
+						<input type="text" name="landmark" id="" class="form-control"  placeholder="Eg:Near Apollo Hospital" value="{{userdata.landmark}}" required>
+					</div>
+					<div class="col-lg-12 mt-2" ">
+							<label for="town" style="font-weight: 500; color: black;">Town/City</label>
+							<input type="text" name="town" id="" class="form-control" value="{{userdata.town}}" required>
+					</div>
+					<div class="col-lg-12 mt-2" ">
+							<label for="state" style="font-weight: 500; color: black;" required>State</label>
+							<select name="state" class="form-select">
+								<option value="Kerala">Kerala</option>
+								<option value="Tamil Nadu">Tamil Nadu</option>
+								<option value="Hydrabhadh">Hydrabhadh</option>
+								<option value="Delhi">Delhi</option>
+								<option value="Karnataka">Karnataka</option>
+							</select>
+					</div>
+					
+					<div class="col-lg-12 mt-2">
+						<input type="submit" value="Update Address" class="btn btn-warning" style="width: 100%;">
+					</div>
+				</form>
+			</div>
+			
+    </div>
+
 		<!-- start footer Area -->
-		<footer class="footer-area section_gap"  style="width: 100%;">
+		<footer class="footer-area section_gap"  style="width: 100%; margin-top:83px ;">
 			<div class="container" >
 				<div class="row" style="display: block; text-align: center;">
 					<div class="col-lg-12  col-md-6 col-sm-6" 
@@ -300,6 +240,8 @@
 			</div>
 		</footer>
 		<!-- End footer Area -->
+
+
 
 	
 </body>

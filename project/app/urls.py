@@ -45,4 +45,8 @@ urlpatterns = [
     path('track_order/<pk>',views.track_order),
     path('ordered_products',views.ordered_products),
     path('return_product',views.return_product),
+    path('update_order_address/<pk>/<data2>',views.update_order_address),
+
+    #buynow
+    path('buynow/<pk>',views.buynow),
 ]
