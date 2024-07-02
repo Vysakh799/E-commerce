@@ -5,6 +5,7 @@ from django.conf import settings
 from django.core.mail import send_mail
 from django.utils import timezone
 from datetime import datetime, timedelta
+from django.views.decorators.csrf import csrf_exempt
 
 def getuser(request):
     user=False
@@ -250,7 +251,7 @@ def order_address1(request,pk):
     request.session['address']=pk
     return order_address(request,pk)
 
-def add_address_order(request,data2):
+def add_order(request,data2):
     item=cart_item.objects.get(pk=data2)
     x=datetime.now()
     date=(x.strftime("%x"))
@@ -266,12 +267,37 @@ def add_address_order(request,data2):
     data.save()
     return redirect(view_cart)
 
+
+def add_order_address(request,data2):
+    if 'user' in request.session:
+        data=users.objects.get(username=request.session.get('user'))
+        pk1=data2
+        if request.method=='POST':
+               region=request.POST['region']
+               fullname=request.POST['fullname']
+               mobilenumber=request.POST['mobilenumber']
+               pincode=request.POST['pincode']
+               add1=request.POST['add1']
+               add2=request.POST['add2']
+               landmark=request.POST['landmark']
+               town=request.POST['town']
+               state=request.POST['state']
+               data=addreses.objects.create(u_name=data,region=region,fullname=fullname,mobilenumber=mobilenumber,pincode=pincode,add1=add1,add2=add2,landmark=landmark,town=town,state=state)
+               data.save()
+               return order_address(request,pk1)
+
+    else:
+        return redirect(login)
+    return render(request,'add_order_address.html',{'type':types(request),'user':getuser(request),'data':data,'data2':data2})
+
+
 def update_order_address(request,pk,data2):
     if 'user' in request.session:
         data=users.objects.get(username=request.session.get('user'))
         data1=addreses.objects.get(pk=pk)
-        userdata=data
+        userdata=data1
         pk1=data2
+        print(type(data2))
         if request.method=='POST':
             region=request.POST['region']
             fullname=request.POST['fullname']
@@ -285,15 +311,30 @@ def update_order_address(request,pk,data2):
             data4=addreses.objects.filter(pk=pk).update(region=region,fullname=fullname,mobilenumber=mobilenumber,pincode=pincode,add1=add1,add2=add2,landmark=landmark,town=town,state=state)
             messages.success(request, "Address Successfully Updated!")
             return order_address(request,pk1)
-        return render(request,'update_order_address.html',{'userdata':userdata})
+        
+        return render(request,'update_order_address.html',{'userdata':userdata,'data2':data2})
     else:
          return redirect(login)
-
+    
+def remove_order_address(request,pk,data2):
+    if 'user' in request.session:
+        pk1=data2
+        addreses.objects.get(pk=pk).delete()
+        messages.warning(request, "Address Deleted Successfully!!")
+    return order_address(request,pk1)
 
 
 def track_order(request,pk):
     order=orders.objects.get(pk=pk)
-    return render(request,'track_order.html',{'type':types(request),'user':getuser(request),'order':order})
+    packed=order.packed
+    shipped=order.shipped
+    outfordelivery=order.outfordelivery
+    delivered=order.delivered
+    return render(request,'track_order.html',{'type':types(request),'user':getuser(request),'order':order,'packed':packed,'shipped':shipped,'outfordelivery':outfordelivery,'delivered':delivered})
+
+def delete_order(request,pk):
+    orders.objects.get(pk=pk).delete()
+    return redirect (ordered_products)
 
 
 def ordered_products(request):
@@ -311,7 +352,6 @@ def ordered_products(request):
         of_p=i.w_product.offer_price
         count=i.quantity
         price.append({'id':i.pk,'price':of_p*count})
-    print(ordered_item)
     return render(request,'ordered_products.html',{'type':types(request),'user':getuser(request),'oritem':ordered_item,'price':price})
 
 def return_product(request):

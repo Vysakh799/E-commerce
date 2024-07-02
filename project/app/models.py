@@ -63,11 +63,10 @@ class cart_item(models.Model):
 class orders(models.Model):
     c_item=models.ForeignKey(cart_item,on_delete=models.CASCADE)
     address_item=models.ForeignKey(addreses,on_delete=models.CASCADE,null=True)
-    payment=models.TextField(null=True)
+    payment=models.BooleanField(default=False)
     packed=models.BooleanField(default=False)
     shipped=models.BooleanField(default=False)
     outfordelivery=models.BooleanField(default=False)
     delivered=models.BooleanField(default=False)
     ordered_date=models.DateField(null=True)
     expected_date=models.DateField(null=True)
-

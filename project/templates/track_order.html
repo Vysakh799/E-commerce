@@ -30,10 +30,14 @@
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    
 </head>
 <style>
     input[type="checkbox"]:checked::after{
         background-color: orange;
+    }
+    .line{
+        border-left: 4px solid rgb(182, 182, 182);height: 50px; margin-left: 19.5px; margin-top: -6px;
     }
 </style>
 <body>
@@ -135,24 +139,24 @@
                 <input type="checkbox" name="orderplaced" checked>
                 &nbsp;<span style="color: black; font-weight: 500;">OrderPlaced</span>
             </div>
-            <div class="col-lg-2" style="border-left: 4px solid rgb(34, 129, 232);height: 50px; margin-left: 20px; margin-top: -6px;"></div>
+            <div class="col-lg-2 line" {% if packed %} style="border-left: 4px solid rgb(54, 143, 245)" {% endif %}></div>
             <div class="col-lg-2" style="display: flex; margin-top: -5px;">
-                <input type="checkbox" name="orderplaced">
+                <input type="checkbox" name="packed" {% if packed %} checked {% endif %}>
                 &nbsp;<span style="color: black; font-weight: 500;">Packed</span>
             </div>
-            <div class="col-lg-2" style="border-left: 4px solid rgb(34, 129, 232);height: 50px; margin-left: 20px; margin-top: -6px;"></div>
+            <div class="col-lg-2 line" {% if shipped %} style="border-left: 4px solid rgb(54, 143, 245)" {% endif %}></div>
             <div class="col-lg-2" style="display: flex; margin-top: -5px;">
-                <input type="checkbox" name="orderplaced">
+                <input type="checkbox" name="shipped" {% if shipped %} checked {% endif %}>
                 &nbsp;<span style="color: black; font-weight: 500;">Shipped</span>
             </div>
-            <div class="col-lg-2" style="border-left: 4px solid rgb(34, 129, 232);height: 50px; margin-left: 20px; margin-top: -6px;"></div>
+            <div class="col-lg-2 line" {% if outfordelivery %} style="border-left: 4px solid rgb(54, 143, 245)" {% endif %}></div>
             <div class="col-lg-2" style="display: flex; margin-top: -5px;">
-                <input type="checkbox" name="orderplaced">
+                <input type="checkbox" name="outfordelivery" {% if  outfordelivery %} checked {% endif %}>
                 &nbsp;<span style="color: black; font-weight: 500;">OutForDevilvery</span>
             </div>
-            <div class="col-lg-2" style="border-left: 4px solid rgb(34, 129, 232);height: 50px; margin-left: 20px; margin-top: -6px;"></div>
+            <div class="col-lg-2 line" {% if delivered %} style="border-left: 4px solid rgb(54, 143, 245)" {% endif %}></div>
             <div class="col-lg-2" style="display: flex; margin-top: -5px;">
-                <input type="checkbox" name="orderplaced">
+                <input type="checkbox" name="delivered" {% if delivered %} checked {% endif %}>
                 &nbsp;<span style="color: black; font-weight: 500;">Delivered</span>
             </div>
         </div>
@@ -162,6 +166,9 @@
                 
                 <p>{% if order.c_item.w_product.weight == 'null' %} {% else %} {{order.c_item.w_product.weight}} {% endif %}</p>
                 <p style="color: grey; font-style: italic;">Expected On : {{order.expected_date}}</p>
+                <a href="../delete_order/{{order.pk}}" class="btn btn-warning" onclick="return confirm('Are you sure you want to delete this?')" {% if shipped %} style="display: none;" {% endif %}>Cancel the order
+                    <!-- <button class="btn btn-warning" id="delete_button" >Cancel the Order</button> -->
+                </a>
             </div>
             <div class="col-lg-12">
                 <img src="{{order.c_item.p_name.image1.url}}" alt="" class="col-lg-6">
