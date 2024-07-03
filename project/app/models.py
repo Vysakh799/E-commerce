@@ -6,7 +6,6 @@ class product(models.Model):
     name=models.TextField()
     type=models.TextField()
     description=models.TextField()
-    stock=models.TextField()
     image1=models.FileField()
     image2=models.FileField(null=True)
     image3=models.FileField(null=True)
@@ -20,6 +19,7 @@ class weight(models.Model):
     price=models.IntegerField()
     offer_price=models.IntegerField()
     weight=models.TextField(null=True)
+    stock=models.IntegerField()
 
     def __str__(self):
         return self.p_name.name

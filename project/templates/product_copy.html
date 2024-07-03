@@ -77,7 +77,11 @@
 		  });
 		});
 	</script>
-
+<style>
+	.weight1{
+		width: 500px;
+	}
+</style>
 </head>
 
 <body>
@@ -189,30 +193,34 @@
 		</div>
 		<div class="part3 col-lg-4 col-sm-4">
 			<h4>{{product1.description}}</h4>
-			<div class="ratting">
-				<p>4.6/5</p>
-			</div>
-			<div class="location">
+			<!-- <div class="location">
 				<div class="location-logo" style="font-size: 15px;">
 					<i class="bi bi-geo-alt"></i>
 				</div>
 				<p>location</p>
-			</div>
+			</div> -->
 			<div class="weight-price">
 				{% for i in weights %}
-				<a href="../../products1/{{product1.pk}}/{{i.pk}}">
-				<div class="weight1 ml-1" {% if selected is i.pk %} style="border: 1px solid black;" {% endif %}>
-					<p id="weight">{{i.weight}}</p>
-					<p class="offerprice">₹{{i.price}}</p>
+				<a href="../../products1/{{product1.pk}}/{{i.pk}}" class="col-lg-5 p-1" >
+				<div class="weight1 col-lg-12  text-center" {% if selected is i.pk %} style="border: 1px solid black;" {% endif %}>
+					<p id="weight" style="color: black; font-weight:500;">{% if i.weight == 'null' %} {% else %}{{i.weight}}{% endif %}</p>
+					<p class="offerprice" style="color: grey;">₹{{i.price}}</p>
 					<p style="color: black;">₹{{i.offer_price}}</p>
+					<p style="color: black; font-weight: 500; font-size: 12px; margin-top: -15px;">{{i.stock}}/10 left</p>
 				</div>
 			    </a>
 				{% endfor %}
 			</div>
 			<div class="buttons">
+				{% if pk_item %}
+				<div class="button1">
+					<a href="../../cart" class="btn " style="width: 100%;">Go to cart</a>
+				</div>
+				{% else %}
 				<div class="button1">
 					<a href="../../add_cart/{{product1.pk}}" class="btn " style="width: 100%;">Add to cart</a>
 				</div>
+				{% endif %}
 				<div class="button2">
 					<a href="../../buynow/{{product1.pk}}" class="btn " style="width: 100%; margin-top: 15px;">Buy Now</a>
 				</div>

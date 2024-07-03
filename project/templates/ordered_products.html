@@ -159,9 +159,11 @@
                                 
                                 <td>
                                     <div class="media">
-                                        <div class="d-flex">
-                                            <img src="{{j.c_item.p_name.image1.url}}" alt="" style="height: 200px;">
-                                        </div>
+                                        <a href="../products/{{j.c_item.p_name.pk}}">
+                                            <div class="d-flex">
+                                                <img src="{{j.c_item.p_name.image1.url}}" alt="" style="height: 200px;">
+                                            </div>
+                                        </a>
                                         <div class="media-body">
                                             <p>{{j.c_item.p_name.name}} {% if j.c_item.w_product.weight == 'null' %} {% else %} | {{j.c_item.w_product.weight}}{% endif %}</p>
                                         </div>
