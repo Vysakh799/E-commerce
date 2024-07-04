@@ -94,8 +94,8 @@
 								<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
 								 aria-expanded="false">Orders</a>
 								<ul class="dropdown-menu">
-									<li class="nav-item"><a class="nav-link" href="blog.html">Track Order</a></li>
-									<li class="nav-item"><a class="nav-link" href="single-blog.html">Order History</a></li>
+									<li class="nav-item"><a class="nav-link" href="../ordered_products">Track Order</a></li>
+									<li class="nav-item"><a class="nav-link" href="../order_history">Order History</a></li>
 								</ul>
 							</li>
 							
@@ -157,11 +157,11 @@
 					</div>
 					<div class="col-lg-12 mt-3">
                         <label for="phno" style="font-weight: 500; color: black;">Phone Number</label>
-						<input type="text" name="phno" id="" value="{{data.phno}}" class="form-control" required>
+						<input type="text" name="phno" id="" value="{{data.phno}}" class="form-control" required pattern="[9876]\d{9}">
 					</div>
 					<div class="col-lg-12 mt-3">
                         <label for="email" style="font-weight: 500; color: black;">Email</label>
-						<input type="email" name="email" id="" value="{{data.email}}" class="form-control" required>
+						<input type="email" name="email" id="" value="{{data.email}}" class="form-control" required pattern="[a-z][a-z0-9]+@gmail.com" placeholder="example@gmail.com">
 					</div>
 					<div class="col-lg-12 mt-3">
                         <label for="username" style="font-weight: 500; color: black;">Username</label>

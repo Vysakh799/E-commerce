@@ -90,8 +90,8 @@
 								<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
 								 aria-expanded="false">Orders</a>
 								<ul class="dropdown-menu">
-									<li class="nav-item"><a class="nav-link" href="blog.html">Track Order</a></li>
-									<li class="nav-item"><a class="nav-link" href="single-blog.html">Order History</a></li>
+									<li class="nav-item"><a class="nav-link" href="../ordered_products">Track Order</a></li>
+									<li class="nav-item"><a class="nav-link" href="../order_history">Order History</a></li>
 								</ul>
 							</li>
 							
@@ -153,7 +153,7 @@
 			<form action="../contact" method="POST" class="form-group col-lg-12">
 				{% csrf_token %}
 				<input type="text" name="name" id="" class="form-control col-lg-4" placeholder="Name" required>
-				<input type="email" name="email" id="" class="form-control col-lg-4 mt-3" placeholder="Email" required>
+				<input type="email" name="email" id="" class="form-control col-lg-4 mt-3" placeholder="Email" required pattern="[a-z][a-z0-9]+@gmail.com">
 				<p>we will contact through this email</p>
 				<input type="text" name="subject" id="" class="form-control col-lg-6" placeholder="Subject" required>
 				<textarea name="description" id="" class="form-control col-lg-6 mt-3" placeholder="Description" required></textarea>

@@ -88,7 +88,7 @@ def products(request,pk,pk1=None):
 
 
         # print(request.session['weight'])
-        return render(request,'product_copy.html',{'weights':weights,'product1':product1,'user':getuser(request),'data':data,'price':price2,'type':types(request),'selected':selected,'pk_item':pk_item})
+        return render(request,'product.html',{'weights':weights,'product1':product1,'user':getuser(request),'data':data,'price':price2,'type':types(request),'selected':selected,'pk_item':pk_item})
     else:
         return redirect(login)
 
@@ -328,12 +328,13 @@ def add_order(request,data2):
 
 
         user=users.objects.get(username=request.session.get('user'))
+        email=user.email
+        print(type(email))
         subject="Your Order has been successfully Placed"
         message = "Your Order "+item.p_name.name+" has been placed successfully. Product is expected on "+str(expected_date)
-        from_email= [settings.EMAIL_HOST_USER]
-        to_mail = [user.email]
-        print(to_mail)
-        send_mail(subject,message,from_email, to_mail,fail_silently=False)
+        email_from = settings.EMAIL_HOST_USER
+        recipient_list = [email, ]
+        send_mail( subject, message, email_from, recipient_list )
 
 
         return redirect(view_cart)
@@ -450,6 +451,19 @@ def buynow(request,pk):
     else:
         return redirect(login)
 
+def order_history(request):
+    if getuser(request):
+        username=request.session.get('user')
+        user1=users.objects.get(username=username)
+        cart_items=cart_item.objects.filter(uname=user1)
+        ordered_item=[]
+        for i in cart_items:
+            data1=orders.objects.filter(c_item=i.pk)
+            if data1:
+                ordered_item.append(data1)
+        return render(request,'order_history.html',{'type':types(request),'user':getuser(request),'oritem':ordered_item})
+    else:
+        return redirect(login)
 
 
 
@@ -528,11 +542,21 @@ def contact(request):
             data.save()
             messages.success(request, "OK our team will contact you as soon as possible !!")
 
-            message = description
-            from_email = email
-            to_mail = [settings.COMPANY_EMAIL]
-            # print(to_mail)
-            send_mail(subject,message,from_email, to_mail,fail_silently=False)
+            message = f"{description}\n\nName: {name}\n\nEmail: {email}\n\n!! CONTACT CUSTOMER AS FAST AS YOU CAN !!"
+            email_from = settings.EMAIL_HOST_USER
+            recipient_list= ["universal7995@gmail.com",]
+            send_mail(subject,message,email_from,recipient_list)
         return render(request,'contact.html',{'type':types(request),'user':getuser(request)}) 
     else:
         return redirect(login)
+    
+# def send_custom_mail(subject,messege,sender_name,sender_email,recipient_list):
+#     email_body=f"{messege}\n\nName:{sender_name}\n\nEmail:{sender_email}"
+#     send_mail(
+#         subject,
+#         email_body,
+#         settings.EMAIL_HOST_USER,
+#         recipient_list,
+#         fail_silently=False,
+#     )
+#     return redirect(contact)

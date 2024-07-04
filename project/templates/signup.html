@@ -81,8 +81,8 @@
 								<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
 								 aria-expanded="false">Orders</a>
 								<ul class="dropdown-menu">
-									<li class="nav-item"><a class="nav-link" href="blog.html">Track Order</a></li>
-									<li class="nav-item"><a class="nav-link" href="single-blog.html">Order History</a></li>
+									<li class="nav-item"><a class="nav-link" href="../ordered_products">Track Order</a></li>
+									<li class="nav-item"><a class="nav-link" href="../order_history">Order History</a></li>
 								</ul>
 							</li>
 							
@@ -164,10 +164,10 @@
 								<input type="text" required class="form-control" id="name" name="name" placeholder="Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Name'">
 							</div>
                             <div class="col-md-12 form-group">
-								<input type="text" required class="form-control" id="name" name="phno" placeholder="Phno" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Phno'">
+								<input type="text" required class="form-control" id="name" name="phno" placeholder="Phno" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Phno'" pattern="[9876]\d{9}">
 							</div>
                             <div class="col-md-12 form-group">
-								<input type="email" required class="form-control" id="name" name="email" placeholder="Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email'">
+								<input type="email" required class="form-control" id="name" name="email" placeholder="Email : example@gmail.com" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email : example@gmail.com'" pattern="[a-z][a-z0-9]+@gmail.com">
 							</div>
 							<div class="col-md-12 form-group">
 								<input type="text" required class="form-control" id="name" name="username" placeholder="Username" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Username'">

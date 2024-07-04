@@ -49,6 +49,7 @@ urlpatterns = [
     path('update_order_address/<pk>/<data2>',views.update_order_address),
     path('remove_order_address/<pk>/<data2>',views.remove_order_address),
     path('delete_order/<pk>',views.delete_order),
+    path('order_history',views.order_history),
 
     #buynow
     path('buynow/<pk>',views.buynow),
