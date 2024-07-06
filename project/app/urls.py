@@ -45,11 +45,13 @@ urlpatterns = [
     path('add_order_address/<data2>',views.add_order_address),
     path('track_order/<pk>',views.track_order),
     path('ordered_products',views.ordered_products),
-    path('return_product',views.return_product),
+    path('replace_product',views.replace_product),
     path('update_order_address/<pk>/<data2>',views.update_order_address),
     path('remove_order_address/<pk>/<data2>',views.remove_order_address),
     path('delete_order/<pk>',views.delete_order),
     path('order_history',views.order_history),
+    path("replace_reorder/<pk>",views.replace_reorder),
+    path("buyagain",views.buyagain),
 
     #buynow
     path('buynow/<pk>',views.buynow),

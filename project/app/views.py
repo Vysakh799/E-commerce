@@ -322,8 +322,12 @@ def add_order(request,data2):
         date_obj = datetime.strptime(formatted_date, "%Y-%m-%d")
         expected = date_obj + timedelta(days=7)
         expected_date=expected.date()
+        st_exp_date=str(expected_date)
+        expdate_obj=datetime.strptime(st_exp_date,"%Y-%m-%d")
+        replacedt=expdate_obj + timedelta(days=7)
+        replacing_date=replacedt.date()
         adr_item=addreses.objects.get(pk=request.session.get('address'))
-        data=orders.objects.create(c_item=item,address_item=adr_item,ordered_date=formatted_date,expected_date=expected_date)
+        data=orders.objects.create(c_item=item,address_item=adr_item,ordered_date=formatted_date,expected_date=expected_date,replacing_date=replacing_date)
         data.save()
 
 
@@ -432,12 +436,64 @@ def ordered_products(request):
     else:
         return redirect(login)
 
-def return_product(request):
+def replace_product(request):
     if getuser(request):
-        return render(request,'return_product.html')
+        username=request.session.get('user')
+        user1=users.objects.get(username=username)
+        cart_items=cart_item.objects.filter(uname=user1)
+        x=datetime.now()
+        date=(x.strftime("%x"))
+        date_string = date
+        parts = date_string.split("/")
+        year = "20" + parts[2]
+        formatted_date = f"{year}-{parts[0]}-{parts[1]}"
+        date_obj = datetime.strptime(formatted_date, "%Y-%m-%d")
+        date_obj1=date_obj.date()
+        ordered_item=[]
+        replaced_items=[]
+        for i in cart_items:
+            data1=orders.objects.filter(c_item=i.pk)
+            if data1:
+                ordered_item.append(data1)
+        for j in ordered_item:
+            for k in j:
+                print(k.replacing_date)
+                if k.delivered==True and k.replaced==False and date_obj1 <= k.replacing_date :
+                    replaced_items.append(k)
+        print(replaced_items)
+                        
+        price=[]
+        for i in cart_items:
+            of_p=i.w_product.offer_price
+            count=i.quantity
+            price.append({'id':i.pk,'price':of_p*count})
+        return render(request,'replace_product.html',{'type':types(request),'user':getuser(request),'oritem':ordered_item,'price':price,'replaced_items':replaced_items})
     else:
         return redirect(login)
+def replace_reorder(request,pk):
+    reorder_item=orders.objects.get(pk=pk)
+    reorder_item.replaced=True
+    reorder_item.save()
+    if reorder_item.delivered:
+        x=datetime.now()
+        date=(x.strftime("%x"))
+        date_string = date
+        parts = date_string.split("/")
+        year = "20" + parts[2]
+        formatted_date = f"{year}-{parts[0]}-{parts[1]}"
+        date_obj = datetime.strptime(formatted_date, "%Y-%m-%d")
+        expected = date_obj + timedelta(days=7)
+        expected_date=expected.date()
+        st_exp_date=str(expected_date)
+        expdate_obj=datetime.strptime(st_exp_date,"%Y-%m-%d")
+        replacedt=expdate_obj + timedelta(days=7)
+        replacing_date=replacedt.date()
 
+
+        data=orders.objects.create(c_item=reorder_item.c_item,address_item=reorder_item.address_item,payment=False,packed=False,shipped=False,outfordelivery=False,delivered=False,ordered_date=formatted_date,expected_date=expected_date,replacing_date=replacing_date)
+        data.save()
+
+    return redirect (replace_product)
 
 def buynow(request,pk):
     if getuser(request):
@@ -464,6 +520,10 @@ def order_history(request):
         return render(request,'order_history.html',{'type':types(request),'user':getuser(request),'oritem':ordered_item})
     else:
         return redirect(login)
+def buyagain(request):
+    return render(request,'buyagain.html')
+
+
 
 
 

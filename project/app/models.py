@@ -70,3 +70,8 @@ class orders(models.Model):
     delivered=models.BooleanField(default=False)
     ordered_date=models.DateField(null=True)
     expected_date=models.DateField(null=True)
+    replaced=models.BooleanField(default=False)
+    replacing_date=models.DateField(null=True)
+
+    def __str__(self):
+        return self.c_item.p_name.name
