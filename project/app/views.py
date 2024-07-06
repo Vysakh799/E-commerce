@@ -521,7 +521,42 @@ def order_history(request):
     else:
         return redirect(login)
 def buyagain(request):
-    return render(request,'buyagain.html')
+    if getuser(request):
+            username=request.session.get('user')
+            user1=users.objects.get(username=username)
+            cart_items=cart_item.objects.filter(uname=user1)
+            x=datetime.now()
+            date=(x.strftime("%x"))
+            date_string = date
+            parts = date_string.split("/")
+            year = "20" + parts[2]
+            formatted_date = f"{year}-{parts[0]}-{parts[1]}"
+            date_obj = datetime.strptime(formatted_date, "%Y-%m-%d")
+            date_obj1=date_obj.date()
+            ordered_item=[]
+            names=[]
+            singlename=[]
+            buyagain_items=[]
+            for i in cart_items:
+                data1=orders.objects.filter(c_item=i.pk)
+                if data1:
+                    ordered_item.append(data1)
+            for i in ordered_item:
+                for j in i:
+                    names.append(j.c_item.p_name.name)
+            for i in names:
+                if i not in singlename:
+                    singlename.append(i)
+            print(singlename)
+            for i in singlename:
+                data=product.objects.filter(name=i)
+                price=weight.objects.all()
+                price2=filter(data,price)
+                for i in price2:
+                    buyagain_items.append(i)
+            return render(request,'buyagain.html',{'type':types(request),'user':getuser(request),'buyagain_items':buyagain_items})
+    else:
+        return redirect(login)
 
 
 

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="zxx" class="no-js">
+
+<head>
+    {% load static %}
+    <!-- Mobile Specific Meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="{% static 'img/fav-icon.png' %}">
+    <!-- Author Meta -->
+    <meta name="author" content="CodePixar">
+    <!-- Meta Description -->
+    <meta name="description" content="">
+    <!-- Meta Keyword -->
+    <meta name="keywords" content="">
+    <!-- meta character set -->
+    <meta charset="UTF-8">
+    <!-- Site Title -->
+    <title>Universal</title>
+
+    <!--
+            CSS
+            ============================================= -->
+    <link rel="stylesheet" href="{% static 'css/linearicons.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.css' %}">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/themify-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'css/nice-select.css' %}">
+    <link rel="stylesheet" href="{% static 'css/nouislider.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+</head>
+
+<body>
+
+    <!-- Start Header Area -->
+	<header class="header_area sticky-header">
+		<div class="main_menu">
+			<nav class="navbar navbar-expand-lg navbar-light main_box">
+				<div class="container">
+					<!-- Brand and toggle get grouped for better mobile display -->
+					<a class="navbar-brand logo_h" href="../"><img src="{% static 'img/logo2.png' %}" alt="" height="50px" width="150px"></a>
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+					 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<!-- Collect the nav links, forms, and other content for toggling -->
+					<div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+						<ul class="nav navbar-nav menu_nav ml-auto">
+							<li class="nav-item"><a class="nav-link" href="../">Home</a></li>
+							<li class="nav-item submenu dropdown">
+								<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+								 aria-expanded="false">Shop</a>
+								<ul class="dropdown-menu">
+									{% for i in type %}
+									<li class="nav-item"><a class="nav-link" href="../catagory/{{i}}">{{i}}</a></li>
+									{% endfor %}
+								</ul>
+							</li>
+							<li class="nav-item submenu dropdown">
+								<a href="" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+								 aria-expanded="false">Orders</a>
+								<ul class="dropdown-menu">
+									<li class="nav-item"><a class="nav-link" href="../ordered_products">Track Order</a></li>
+									<li class="nav-item"><a class="nav-link" href="../order_history">Order History</a></li>
+								</ul>
+							</li>
+							
+							<li class="nav-item"><a class="nav-link " href="../contact">Contact</a></li>
+							
+
+							<!-- </ul>
+							<ul class="nav navbar-nav navbar-right"> -->
+							<li class="nav-item cart active"><a href="../cart" class="nav-link" id="index-cart"><i class="bi bi-cart4" style="font-size: 20px;"></i></a></li>
+							<li class="nav-item">
+								<button class="search mt-2" id="index-button" style="border: 1px solid white; background-color: white;"><i class="bi bi-search" id="search" style="font-size: 15px;"></i></button>
+							</li>
+							{% if user %}
+							<li class="nav-item submenu dropdown">
+								<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+								 aria-expanded="false"><i class="bi bi-person-circle" style="font-size: 18px;"></i></a>
+								<ul class="dropdown-menu">
+									<li class="nav-item"><a class="nav-link" href="../user">Profile</a></li>
+									<li class="nav-item"><a class="nav-link" href="../logout">Logout</a></li>
+									
+								</ul>
+							</li>							
+							{% else %}
+							<li class="nav-item"><a class="nav-link" href="../login">Login</a></li>
+							{% endif %}
+						</ul>
+					</div>
+				</div>
+			</nav>
+		</div>
+		<div class="search_input" id="search_input_box">
+			<div class="container">
+				<form class="d-flex justify-content-between">
+					<input type="text" class="form-control" id="search_input" placeholder="Search Here">
+					<button type="submit" class="btn"></button>
+					<span class="lnr lnr-cross" id="close_search" title="Close Search"></span>
+				</form>
+			</div>
+		</div>
+	</header>
+	<!-- End Header Area -->
+
+    <!-- Start Banner Area -->
+    <section class="banner-area organic-breadcrumb">
+        <div class="container">
+            <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+                <div class="col-first">
+                    <h1>Buy Again</h1>
+                    <nav class="d-flex align-items-center">
+                        <a href="../user">Profile<span class="lnr lnr-arrow-right"></span></a>
+                        <a href="../yourorders">Your Orders<span class="lnr lnr-arrow-right"></span></a>
+                        <a href="../buyagain">Buy again</a>
+                    </nav>
+                    <p>If you like it . You will buy it </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Banner Area -->
+
+    <!--================Cart Area =================-->
+    <section class="cart_area">
+        <div class="container">
+            <!-- {% if messages %}
+            {% for message in messages %}
+
+            <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+                <strong>{{ message }}</strong> 
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              {% endfor %}
+
+              {% endif %} -->
+            <div class="cart_inner">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Product</th>
+                                <th scope="col"></th>
+                                <th scope="col">Buy</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for j in buyagain_items %}
+                            <tr>
+
+                                
+                                <td>
+                                    <div class="media">
+                                        <a href="../products/{{j.p_name.pk}}">
+                                            <div class="d-flex">
+                                                <img src="{{j.p_name.image1.url}}" alt="" style="height: 200px;">
+                                            </div>
+                                        </a>
+                                        <div class="media-body">
+                                            <p>{{j.p_name.name}} {% if j.weight == 'null' %} {% else %} | {{j.weight}}{% endif %}</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    
+                                    
+                                </td>
+                                <td>
+                                    <a href="../products/{{j.p_name.pk}}" class="btn btn-warning">Buy Again</a><br>
+                                    
+                                    
+                                </td>
+                                
+                            </tr>
+                            {% endfor %}
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--================End Cart Area =================-->
+
+    <!-- start footer Area -->
+    <footer class="footer-area section_gap"  style="width: 100%;">
+        <div class="container" >
+            <div class="row" style="display: block; text-align: center;">
+                <div class="col-lg-12  col-md-6 col-sm-6" 
+                    <div class="single-footer-widget" style="width: 100%;">
+                        <h6>UNIVERSAL : Equip Yourself & Train with Us!</h6>
+                        <p>
+                            
+
+We provide a complete fitness solution: top-quality gym equipment for your home workouts and a supportive training center with expert-led classes and personalized sessions.
+
+Empower your fitness journey. Shop smart, train strong.
+                        </p>
+                    </div>
+                </div>
+                </div> 
+                <div class="col-lg-12 col-md-6 col-sm-6">
+                    <div class="single-footer-widget" style="text-align: center;">
+                        
+                        <div class="footer-social d-flex justify-content-center"  style="font-size: 19px;">
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                            <a href="#"><i class="fa fa-dribbble"></i></a>
+                            <a href="#"><i class="fa fa-behance"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- End footer Area -->
+
+    <script src="{% static 'js/vendor/jquery-2.2.4.min.js' %}"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
+	 crossorigin="anonymous"></script>
+	<script src="{% static 'js/vendor/bootstrap.min.js' %}"></script>
+	<script src="{% static 'js/jquery.ajaxchimp.min.js' %}"></script>
+	<script src="{% static 'js/jquery.nice-select.min.js' %}"></script>
+	<script src="{% static 'js/jquery.sticky.js' %}"></script>
+    <script src="{% static 'js/nouislider.min.js' %}"></script>
+	<script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+	<script src="{% static 'js/owl.carousel.min.js' %}"></script>
+	<!--gmaps Js-->
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
+	<script src="{% static 'js/gmaps.min.js' %}"></script>
+	<script src="{% static 'js/main.js' %}"></script>
+
+</body>
+
+</html>
