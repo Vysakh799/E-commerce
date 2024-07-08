@@ -6,6 +6,8 @@ from django.core.mail import send_mail
 from django.utils import timezone
 from datetime import datetime, timedelta
 from django.views.decorators.csrf import csrf_exempt
+import bcrypt
+from django.contrib.auth.hashers import check_password
 
 
 #General functions
@@ -31,6 +33,22 @@ def types(request):
               type2.append(i.type)
     return type2
 
+def search_func(request):
+    if request.method=='POST':
+        inp=request.POST['search']
+        pro_name=[]
+        data=product.objects.all()
+        catago=[]
+        for i in data:
+            if i.name==inp:
+                pro_name.append(i)
+                catago.append(i.type)
+            elif i.type==inp:   
+                pro_name=product.objects.filter(type=inp)
+        price=weight.objects.all()
+        price2=filter(pro_name,price)
+    return render(request,'search.html',{'price':price2,'type':types(request),'user':getuser(request)})
+    
 
 
 
@@ -108,7 +126,18 @@ def login(request):
         if request.method=="POST":
             username=request.POST['username']
             password=request.POST['password']
+            psw=password.encode('utf-8')
+            salt=bcrypt.gensalt()               #Password Hashing
+            psw_hashed=bcrypt.hashpw(psw,salt)
+            data=users.objects.get(username=username)
+            print(psw_hashed)
+            print(data.password)
+            if check_password(psw_hashed,data.password):
+                print(True)
+            else:
+                print(False)
             try:
+
                 data=users.objects.get(username=username,password=password)
                 request.session['user']=username
                 messages.success(request, "Login successfully completed!") 
@@ -133,12 +162,17 @@ def signup(request):
         username=request.POST['username']
         password=request.POST['password']
         cnf_password=request.POST['cnf_password']
+
+        psw=password.encode('utf-8')
+        salt=bcrypt.gensalt()               #Password Hashing
+        psw_hashed=bcrypt.hashpw(psw,salt)
+
         if password==cnf_password:
-            data=users.objects.create(name=name,phno=phno,email=email,username=username,password=password)
+            data=users.objects.create(name=name,phno=phno,email=email,username=username,password=psw_hashed)
             data.save()
-            messages.warning(request, "Password Doesn't match !")  # recorded
+            messages.success(request, "Account created successfully pls login to continue !")  # recorded
         else:
-            messages.warning(request, "Account created successfully pls login to continue !")  # recorded
+            messages.warning(request, "Password Doesn't match !")  # recorded
         
 
         return redirect(login)
@@ -622,6 +656,38 @@ def update_password(request):
     else:
         return redirect(login)
 
+def forgot_password_mail(request):
+    if request.method=='POST':
+        email=request.POST['email']
+        subject='Change Password'
+        path='http://127.0.0.1:8000/forgot_password'
+        message = f"Click the Link below to change the password\n\n{path}\n\nPls login again using web to continue"
+        email_from = settings.EMAIL_HOST_USER
+        recipient_list= [email,]
+        send_mail(subject,message,email_from,recipient_list)
+    return render(request,'forgot_password_mail.html')
+
+
+
+
+
+def forgot_password(request):
+    if request.method=='POST':
+        email=request.POST['email']
+        new_password=request.POST['newpassword']
+        conform_password=request.POST['confirmpassword']
+        if new_password==conform_password:
+            try:
+                data=users.objects.filter(email=email).update(password=new_password)
+                print(data)
+                messages.success(request,"Password Changed Sucessfully")
+            except:
+                messages.warning(request,"User assosiated to this mail does't exist")
+        else:
+                messages.warning(request, "Passwords Doesn't match!!")
+        # print(email,new_password,conform_password)
+
+    return render(request,'forgot_password.html')
 
 
 
@@ -645,13 +711,3 @@ def contact(request):
     else:
         return redirect(login)
     
-# def send_custom_mail(subject,messege,sender_name,sender_email,recipient_list):
-#     email_body=f"{messege}\n\nName:{sender_name}\n\nEmail:{sender_email}"
-#     send_mail(
-#         subject,
-#         email_body,
-#         settings.EMAIL_HOST_USER,
-#         recipient_list,
-#         fail_silently=False,
-#     )
-#     return redirect(contact)

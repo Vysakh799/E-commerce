@@ -27,6 +27,8 @@ urlpatterns = [
     path('update_user',views.update_user),
     path('update',views.update),
     path('update_password',views.update_password),
+    path('forgot_password',views.forgot_password),
+    path('forgot_password_mail',views.forgot_password_mail),
 
     #contact section
     path('contact',views.contact),
@@ -55,4 +57,7 @@ urlpatterns = [
 
     #buynow
     path('buynow/<pk>',views.buynow),
+
+    #Search
+    path('search_func',views.search_func)
 ]
