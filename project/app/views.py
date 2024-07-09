@@ -54,10 +54,10 @@ def search_func(request):
 
 #Index
 def index(request):
-    data=product.objects.all()[::-1][:5]
+    data=product.objects.all()[::-1][:8]
     price=weight.objects.all()
     price2=filter(data,price)
-    data2=product.objects.all()
+    data2=product.objects.all()[:8]
     allp=filter(data2,price)
     data3=product.objects.all()[::-1][:3]
     addp=filter(data3,price)
@@ -127,23 +127,22 @@ def login(request):
             username=request.POST['username']
             password=request.POST['password']
             psw=password.encode('utf-8')
-            salt=bcrypt.gensalt()               #Password Hashing
-            psw_hashed=bcrypt.hashpw(psw,salt)
-            data=users.objects.get(username=username)
-            print(psw_hashed)
-            print(data.password)
-            if check_password(psw_hashed,data.password):
-                print(True)
-            else:
-                print(False)
-            try:
+            # salt=bcrypt.gensalt()               #Password Hashing
+            # psw_hashed=bcrypt.hashpw(psw,salt)
+            # print(psw_hashed)
 
-                data=users.objects.get(username=username,password=password)
-                request.session['user']=username
-                messages.success(request, "Login successfully completed!") 
+            try:
+                data=users.objects.get(username=username)
+                if bcrypt.checkpw(psw,data.password.encode('utf-8')):
+                    # data=users.objects.get(username=username,password=password.encode('utf-8'))
+                    request.session['user']=username
+                    messages.success(request, "Login successfully completed!") 
+                else:
+                    messages.warning(request, "Incorrect password!")
+                
 
             except:
-                messages.warning(request, "Incorrect username or password!") 
+                messages.warning(request, "Incorrect Username!") 
         
             return redirect(login)
         else:
@@ -168,7 +167,7 @@ def signup(request):
         psw_hashed=bcrypt.hashpw(psw,salt)
 
         if password==cnf_password:
-            data=users.objects.create(name=name,phno=phno,email=email,username=username,password=psw_hashed)
+            data=users.objects.create(name=name,phno=phno,email=email,username=username,password=psw_hashed.decode('utf-8'))
             data.save()
             messages.success(request, "Account created successfully pls login to continue !")  # recorded
         else:
@@ -374,7 +373,7 @@ def add_order(request,data2):
         recipient_list = [email, ]
         send_mail( subject, message, email_from, recipient_list )
 
-
+        messages.success(request,'Order Placed Check out your mail for more details!!')
         return redirect(view_cart)
     else:
         return redirect(login)
@@ -641,14 +640,20 @@ def update_password(request):
             currentpassword=request.POST['currentpassword']
             newpassword=request.POST['newpassword']
             confirmpassword=request.POST['confirmpassword']
+            psw=currentpassword.encode('utf-8')
+            psw2=newpassword.encode('utf-8')
+            salt=bcrypt.gensalt()               #Password Hashing
+            psw_hashed=bcrypt.hashpw(psw2,salt)
             try:
-                data=users.objects.get(password=currentpassword)
-                if newpassword==confirmpassword:
-                    data=users.objects.filter(pk=data.pk).update(password=newpassword)
-                    # print(data)
-                    messages.success(request, "Successfully changed password!!")
+                if bcrypt.checkpw(psw,data.password.encode('utf-8')):
+                    if newpassword==confirmpassword:
+                        data=users.objects.filter(pk=data.pk).update(password=psw_hashed.decode('utf-8'))
+                        # print(data)
+                        messages.success(request, "Successfully changed password!!")
+                    else:
+                        messages.warning(request, "Password Doesn't match!!")
                 else:
-                    messages.warning(request, "Password Doesn't match!!")
+                    messages.warning(request,'Current password didnt match your account')
             except:
                 messages.warning(request, "Incorrect Password!")
 
@@ -664,7 +669,11 @@ def forgot_password_mail(request):
         message = f"Click the Link below to change the password\n\n{path}\n\nPls login again using web to continue"
         email_from = settings.EMAIL_HOST_USER
         recipient_list= [email,]
-        send_mail(subject,message,email_from,recipient_list)
+        try:
+            send_mail(subject,message,email_from,recipient_list)
+            messages.success(request,"Email sent ! Check your inbox")
+        except:
+            messages.warning(request,"Error Pls try again with another Email")
     return render(request,'forgot_password_mail.html')
 
 
@@ -676,9 +685,12 @@ def forgot_password(request):
         email=request.POST['email']
         new_password=request.POST['newpassword']
         conform_password=request.POST['confirmpassword']
+        psw=new_password.encode('utf-8')
+        salt=bcrypt.gensalt()               #Password Hashing
+        psw_hashed=bcrypt.hashpw(psw,salt)
         if new_password==conform_password:
             try:
-                data=users.objects.filter(email=email).update(password=new_password)
+                data=users.objects.filter(email=email).update(password=psw_hashed.decode('utf-8'))
                 print(data)
                 messages.success(request,"Password Changed Sucessfully")
             except:

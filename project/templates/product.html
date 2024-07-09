@@ -79,7 +79,7 @@
 	</script>
 <style>
 	.weight1{
-		width: 500px;
+		width: 80px;
 	}
 </style>
 </head>
@@ -92,7 +92,7 @@
 			<nav class="navbar navbar-expand-lg navbar-light main_box">
 				<div class="container">
 					<!-- Brand and toggle get grouped for better mobile display -->
-					<a class="navbar-brand logo_h" href="../"><img src="{% static 'img/logo2.png' %}" alt="" height="50px" width="150px"></a>
+					<a class="navbar-brand logo_h" href="../../"><img src="{% static 'img/logo2.png' %}" alt="" height="50px" width="150px"></a>
 					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
 					 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 						<span class="icon-bar"></span>
@@ -102,7 +102,7 @@
 					<!-- Collect the nav links, forms, and other content for toggling -->
 					<div class="collapse navbar-collapse offset" id="navbarSupportedContent">
 						<ul class="nav navbar-nav menu_nav ml-auto">
-							<li class="nav-item active"><a class="nav-link" href="../">Home</a></li>
+							<li class="nav-item active"><a class="nav-link" href="../../">Home</a></li>
 							<li class="nav-item submenu dropdown">
 								<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
 								 aria-expanded="false">Shop</a>
@@ -150,8 +150,9 @@
 		</div>
 		<div class="search_input" id="search_input_box">
 			<div class="container">
-				<form class="d-flex justify-content-between">
-					<input type="text" class="form-control" id="search_input" placeholder="Search Here">
+				<form class="d-flex justify-content-between" action="../search_func" method="POST">
+					{% csrf_token %}
+					<input type="text" class="form-control" id="search_input" placeholder="Search Here" name="search">
 					<button type="submit" class="btn"></button>
 					<span class="lnr lnr-cross" id="close_search" title="Close Search"></span>
 				</form>
@@ -159,7 +160,7 @@
 		</div>
 	</header>
 	<div class="div d-flex justify-content-center aling-items-center">
-	<div class="container row" style="margin-top: 200px;" >
+	<div class="container row" style="margin-top: 130px;" >
 		<div class="col-lg-1"></div>
 		<div class="images col-lg-7 d-flex">
 			<div class="part1 col-lg-3 col-sm-7">
@@ -201,8 +202,8 @@
 			</div> -->
 			<div class="weight-price">
 				{% for i in weights %}
-				<a href="../../products1/{{product1.pk}}/{{i.pk}}" class="col-lg-5 p-1" >
-				<div class="weight1 col-lg-12  text-center" {% if selected is i.pk %} style="border: 1px solid black;" {% endif %}>
+				<a href="../../products1/{{product1.pk}}/{{i.pk}}" class="col-lg-5 col-sm-2 p-1" >
+				<div class="weight1 col-lg-12 col-md-3 col-sm-2  text-center" {% if selected is i.pk %} style="border: 1px solid black;" {% endif %}>
 					<p id="weight" style="color: black; font-weight:500;">{% if i.weight == 'null' %} {% else %}{{i.weight}}{% endif %}</p>
 					<p class="offerprice" style="color: grey;">₹{{i.price}}</p>
 					<p style="color: black;">₹{{i.offer_price}}</p>
@@ -238,8 +239,8 @@
 			{% for k in price %}
 				{% if k.p_name.name != product1.name %}
 					<a href="../../products/{{k.p_name.pk}}">
-						<div class="col-lg-3 col-md-6">
-							<div class="single-product">
+						<div class="col-lg-3">
+							<div class="single-product col-lg-12">
 								<img class="img-fluid" src="{{k.p_name.image1.url}}" alt="" height="250px">
 								<div class="product-details">
 									<h6>{{k.p_name.name}}</h6>
@@ -251,22 +252,22 @@
 									</div>
 									<div class="prd-bottom">
 	
-										<a href="" class="social-info">
-											<span class="ti-bag"></span>
-											<p class="hover-text">add to bag</p>
+										<a href="../../add_cart/{{k.p_name.pk}}" class="social-info">
+											<i class="bi bi-cart4" style="font-size: 20px; color: black;"></i>
+											<p class="hover-text" style="margin-left: -5px;">add to Cart</p>
 										</a>
 										<a href="" class="social-info">
-											<span class="lnr lnr-heart"></span>
-											<p class="hover-text">Wishlist</p>
+											<!-- <span class="lnr lnr-heart"></span>
+											<p class="hover-text">Wishlist</p> -->
 										</a>
 										<a href="" class="social-info">
-											<span class="lnr lnr-sync"></span>
-											<p class="hover-text">compare</p>
+											<!-- <span class="lnr lnr-sync"></span>
+											<p class="hover-text">compare</p> -->
 										</a>
-										<a href="" class="social-info">
-											<span class="lnr lnr-move"></span>
-											<p class="hover-text">view more</p>
-										</a>
+										<!-- <a href="" class="social-info"> -->
+											<!-- <span class="lnr lnr-move"></span>
+											<p class="hover-text">view more</p> -->
+										<!-- </a> -->
 									</div>
 								</div>
 							</div>

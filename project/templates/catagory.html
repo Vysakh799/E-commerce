@@ -122,8 +122,9 @@
 		</div>
 		<div class="search_input" id="search_input_box">
 			<div class="container">
-				<form class="d-flex justify-content-between">
-					<input type="text" class="form-control" id="search_input" placeholder="Search Here">
+				<form class="d-flex justify-content-between" action="../search_func" method="POST">
+					{% csrf_token %}
+					<input type="text" class="form-control" id="search_input" placeholder="Search Here" name="search">
 					<button type="submit" class="btn"></button>
 					<span class="lnr lnr-cross" id="close_search" title="Close Search"></span>
 				</form>
@@ -148,22 +149,22 @@
 									</div>
 									<div class="prd-bottom">
 	
-										<a href="" class="social-info">
-											<span class="ti-bag"></span>
-											<p class="hover-text">add to bag</p>
+										<a href="../../add_cart/{{k.p_name.pk}}" class="social-info">
+											<i class="bi bi-cart4" style="font-size: 20px; color: black;"></i>
+											<p class="hover-text" style="margin-left: -5px;">add to Cart</p>
 										</a>
 										<a href="" class="social-info">
-											<span class="lnr lnr-heart"></span>
-											<p class="hover-text">Wishlist</p>
+											<!-- <span class="lnr lnr-heart"></span>
+											<p class="hover-text">Wishlist</p> -->
 										</a>
 										<a href="" class="social-info">
-											<span class="lnr lnr-sync"></span>
-											<p class="hover-text">compare</p>
+											<!-- <span class="lnr lnr-sync"></span>
+											<p class="hover-text">compare</p> -->
 										</a>
-										<a href="" class="social-info">
-											<span class="lnr lnr-move"></span>
-											<p class="hover-text">view more</p>
-										</a>
+										<!-- <a href="" class="social-info"> -->
+											<!-- <span class="lnr lnr-move"></span>
+											<p class="hover-text">view more</p> -->
+										<!-- </a> -->
 									</div>
 								</div>
 							</div>
