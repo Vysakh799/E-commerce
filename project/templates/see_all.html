@@ -54,34 +54,6 @@
 	<script src="{% static 'js/gmaps.min.js' %}"></script>
 	<script src="{% static 'js/main.js' %}"></script>
 
-
-
-
-	<script>
-		$(document).ready(function(){
-		  $("#p1").click(function(){
-			$("#im1").show();
-			$("#im2,#im3,#im4").hide();
-		  });
-		  $("#p2").click(function(){
-			$("#im2").show();
-			$("#im1,#im3,#im4").hide();
-		  });
-		  $("#p3").click(function(){
-			$("#im3").show();
-			$("#im1,#im2,#im4").hide();
-		  });
-		  $("#p4").click(function(){
-			$("#im4").show();
-			$("#im1,#im3,#im2").hide();
-		  });
-		});
-	</script>
-<style>
-	.weight1{
-		width: 80px;
-	}
-</style>
 </head>
 
 <body>
@@ -92,7 +64,7 @@
 			<nav class="navbar navbar-expand-lg navbar-light main_box">
 				<div class="container">
 					<!-- Brand and toggle get grouped for better mobile display -->
-					<a class="navbar-brand logo_h" href="../../"><img src="{% static 'img/logo2.png' %}" alt="" height="50px" width="150px"></a>
+					<a class="navbar-brand logo_h" href="../"><img src="{% static 'img/logo2.png' %}" alt="" height="50px" width="150px"></a>
 					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
 					 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 						<span class="icon-bar"></span>
@@ -102,13 +74,13 @@
 					<!-- Collect the nav links, forms, and other content for toggling -->
 					<div class="collapse navbar-collapse offset" id="navbarSupportedContent">
 						<ul class="nav navbar-nav menu_nav ml-auto">
-							<li class="nav-item active"><a class="nav-link" href="../../">Home</a></li>
-							<li class="nav-item submenu dropdown">
+							<li class="nav-item "><a class="nav-link" href="../">Home</a></li>
+							<li class="nav-item submenu dropdown active">
 								<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
 								 aria-expanded="false">Shop</a>
 								<ul class="dropdown-menu">
 									{% for i in type %}
-									<li class="nav-item"><a class="nav-link" href="../../catagory/{{i}}">{{i}}</a></li>
+									<li class="nav-item"><a class="nav-link" href="../catagory/{{i}}">{{i}}</a></li>
 									{% endfor %}
 								</ul>
 							</li>
@@ -116,17 +88,17 @@
 								<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
 								 aria-expanded="false">Orders</a>
 								<ul class="dropdown-menu">
-									<li class="nav-item"><a class="nav-link" href="../../ordered_products">Track Order</a></li>
-									<li class="nav-item"><a class="nav-link" href="../../order_history">Order History</a></li>
+									<li class="nav-item"><a class="nav-link" href="../ordered_products">Track Order</a></li>
+									<li class="nav-item"><a class="nav-link" href="../order_history">Order History</a></li>
 								</ul>
 							</li>
 							
-							<li class="nav-item"><a class="nav-link" href="../../contact">Contact</a></li>
+							<li class="nav-item"><a class="nav-link" href="../contact">Contact</a></li>
 							
 
 							<!-- </ul>
 							<ul class="nav navbar-nav navbar-right"> -->
-							<li class="nav-item"><a href="../../cart" class="nav-link" id="index-cart"><i class="bi bi-cart4" style="font-size: 20px;"></i></a></li>
+							<li class="nav-item"><a href="../cart" class="nav-link" id="index-cart"><i class="bi bi-cart4" style="font-size: 20px;"></i></a></li>
 							<li class="nav-item">
 								<button class="search mt-2" id="index-button" style="border: 1px solid white; background-color: white;"><i class="bi bi-search" id="search" style="font-size: 15px;"></i></button>
 							</li>
@@ -135,8 +107,8 @@
 								<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
 								 aria-expanded="false"><i class="bi bi-person-circle" style="font-size: 18px;"></i></a>
 								<ul class="dropdown-menu">
-									<li class="nav-item"><a class="nav-link" href="../../user">Profile</a></li>
-									<li class="nav-item"><a class="nav-link" href="../../logout">Logout</a></li>
+									<li class="nav-item"><a class="nav-link" href="../user">Profile</a></li>
+									<li class="nav-item"><a class="nav-link" href="../logout">Logout</a></li>
 									
 								</ul>
 							</li>							
@@ -159,88 +131,13 @@
 			</div>
 		</div>
 	</header>
-	<div class="div d-flex justify-content-center aling-items-center">
-	<div class="container row" style="margin-top: 130px;" >
-		<div class="col-lg-1"></div>
-		<div class="images col-lg-7 d-flex">
-			<div class="part1 col-lg-3 col-sm-7">
-				<div class="photo1" style="width:50%;">
-					<img src="{{product1.image1.url}}" alt="" id="p1" width="100%">
-				</div>
-				<div class="photo2" style="width:50%;" >
-					<img src="{{product1.image2.url}}" alt="" id="p2" width="100%">
-				</div>
-				<div class="photo3" style="width:50%;">
-					<img src="{{product1.image3.url}}" alt="" id="p3" width="100%">
-				</div>
-				<div class="photo4" style="width:50%;">
-					<img src="{{product1.image4.url}}" alt="" id="p4" width="100%">
-				</div>
-			</div>
-			<div class="part2 col-lg-9">
-				<div class="image1">
-					<img src="{{product1.image1.url}}" alt="" id="im1" width="80%">
-				</div>
-				<div class="image2">
-					<img src="{{product1.image2.url}}" alt="" id="im2"style="display: none;" width="80%">
-				</div>
-				<div class="image3">
-					<img src="{{product1.image3.url}}" alt="" id="im3" style="display: none;" width="80%" >
-				</div>
-				<div class="image4">
-					<img src="{{product1.image4.url}}" alt="" id="im4" style="display: none;" width="80%">
-				</div>
-			</div>
-		</div>
-		<div class="part3 col-lg-4 col-sm-4">
-			<h4>{{product1.description}}</h4>
-			<!-- <div class="location">
-				<div class="location-logo" style="font-size: 15px;">
-					<i class="bi bi-geo-alt"></i>
-				</div>
-				<p>location</p>
-			</div> -->
-			<div class="weight-price">
-				{% for i in weights %}
-				<a href="../../products1/{{product1.pk}}/{{i.pk}}" class="col-lg-5 col-sm-2 p-1" >
-				<div class="weight1 col-lg-12 col-md-3 col-sm-2  text-center" {% if selected is i.pk %} style="border: 1px solid black;" {% endif %}>
-					<p id="weight" style="color: black; font-weight:500;">{% if i.weight == 'null' %} {% else %}{{i.weight}}{% endif %}</p>
-					<p class="offerprice" style="color: grey;">₹{{i.price}}</p>
-					<p style="color: black;">₹{{i.offer_price}}</p>
-					<p style="color: black; font-weight: 500; font-size: 12px; margin-top: -15px;">{{i.stock}}/10 left</p>
-				</div>
-			    </a>
-				{% endfor %}
-			</div>
-			<div class="buttons">
-				{% if pk_item %}
-				<div class="button1">
-					<a href="../../cart" class="btn " style="width: 100%;">Go to cart</a>
-				</div>
-				{% else %}
-				<div class="button1">
-					<a href="../../add_cart/{{product1.pk}}" class="btn " style="width: 100%;">Add to cart</a>
-				</div>
-				{% endif %}
-				<div class="button2">
-					<a href="../../buynow/{{product1.pk}}" class="btn " style="width: 100%; margin-top: 15px;">Buy Now</a>
-				</div>
-			</div>
-		</div>
-
-
-	</div>
-	</div>
 	<div class="alsolike container" style="margin-top: 150px;">
-		<div class="head">
-			<p style="font-size: 23px; font-weight: 600; color: black;">You Might also like</p>
-		</div>
 		<div class="alsopro row mt-5">
 			{% for k in price %}
 				{% if k.p_name.name != product1.name %}
-					<a href="../../products/{{k.p_name.pk}}">
-						<div class="col-lg-3">
-							<div class="single-product col-lg-12">
+					<a href="../products/{{k.p_name.pk}}">
+						<div class="col-lg-3 col-md-6">
+							<div class="single-product">
 								<img class="img-fluid" src="{{k.p_name.image1.url}}" alt="" height="250px">
 								<div class="product-details">
 									<h6>{{k.p_name.name}}</h6>
@@ -309,6 +206,8 @@
 			</div>
 		</footer>
 		<!-- End footer Area -->
+
+
 
 	
 </body>

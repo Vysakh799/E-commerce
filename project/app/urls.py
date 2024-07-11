@@ -8,6 +8,7 @@ urlpatterns = [
     #products
     path('products/<pk>',views.products),
     path('products1/<pk>/<pk1>',views.products1),
+    path('see_all',views.see_all),
 
     #login and logout
     path('login',views.login),

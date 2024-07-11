@@ -115,7 +115,12 @@ def products1(req,pk,pk1):
     req.session['weight']=pk1
     return products(req,pk,pk1)
 
-
+def see_all(request):
+    data=product.objects.all()
+    price=weight.objects.all()
+    price2=filter(data,price)
+    return render(request,'see_all.html',{'price':price2})
+        
 
 
 
@@ -150,7 +155,7 @@ def login(request):
 def logout(request):
     if getuser(request):
         del request.session['user']
-        return redirect(index)
+        return redirect(login)
     else:
         return redirect(login)
 def signup(request):    

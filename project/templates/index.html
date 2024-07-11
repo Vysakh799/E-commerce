@@ -257,16 +257,19 @@
 								</a>
 							</div>
 						</div>
+						
 						<div class="col-lg-4 col-md-4">
+							<a href="../catagory/Belts">
 							<div class="single-deal">
 								<div class="overlay"></div>
 								<img class="img-fluid w-100" src="{% static 'img/category/c3.webp' %}" height="200px" alt="">
-								<a href="{% static 'img/category/c3.jpg' %}" class="img-pop-up" target="_blank">
+								<!-- <a href="{% static 'img/category/c3.jpg' %}" target="_blank"> -->
 									<div class="deal-details">
 										<h6 class="deal-title">Powerlifting Belt's</h6>
 									</div>
-								</a>
+								<!-- </a> -->
 							</div>
+							</a>
 						</div>
 						<div class="col-lg-8 col-md-8">
 							<div class="single-deal">
@@ -361,7 +364,7 @@
 						<div class="section-title">
 							<h1>All Products</h1>
 							<p>whole products in out store</p>
-							<a href="" style="color: orange;">See all Products</a>
+							<a href="../see_all" style="color: orange;">See all Products</a>
 						</div>
 					</div>
 				</div>
@@ -383,8 +386,8 @@
 								<div class="prd-bottom">
 
 									<a href="../../add_cart/{{k.pk}}" class="social-info">
-										<span class="ti-bag"></span>
-										<p class="hover-text">add to bag</p>
+										<i class="bi bi-cart4" style="font-size: 20px; color: black;"></i>
+										<p class="hover-text" style="margin-left: -5px;">add to Cart</p>
 									</a>
 									<a href="" class="social-info">
 										<!-- <span class="lnr lnr-heart"></span>
@@ -456,8 +459,10 @@
 								</div>
 								<h4>{{i.p_name.name}}</h4>
 								<div class="add-bag d-flex align-items-center justify-content-center">
-									<a class="add-btn" href=""><span class="ti-bag"></span></a>
-									<span class="add-text text-uppercase">Add to Cart</span>
+									<a href="../../add_cart/{{i.p_name.pk}}" class="social-info">
+										<i class="bi bi-cart4" style="font-size: 20px; color: black"></i>
+										<p class="hover-text" ></p>
+									</a>
 								</div>
 							</div>
 						</div>
