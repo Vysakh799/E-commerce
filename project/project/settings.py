@@ -122,8 +122,8 @@ STATICFILES_DIRS=[os.path.join(BASE_DIR,'static')]
 MEDIA_URL='/media/'
 MEDIA_ROOT=os.path.join(BASE_DIR,'media')
 
-RAZORPAY_KEY_ID = 'rzp_test_BtuuOdsH13V0mm'
-RAZORPAY_KEY_SECRET = 'dmLJ8YFUV7vt4uNETZguxLrX'
+RAZORPAY_KEY_ID = '#'
+RAZORPAY_KEY_SECRET = '#'
 
 
 
@@ -141,5 +141,5 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587    
 EMAIL_HOST_USER = "universal7995@gmail.com"
-EMAIL_HOST_PASSWORD = "dkdm njdk qnom bxaj"
+EMAIL_HOST_PASSWORD = "#"
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
