@@ -44,13 +44,13 @@ urlpatterns = [
     path('order_address1/<pk>',views.order_address1),
 
     #order
-    path('add_order/<data2>',views.add_order),
-    path('add_order_address/<data2>',views.add_order_address),
+    path('add_order/<data2>',views.add_order,name='add_order'),
+    path('add_order_address/<int:data2>',views.add_order_address),
     path('track_order/<pk>',views.track_order),
     path('ordered_products',views.ordered_products),
     path('replace_product',views.replace_product),
-    path('update_order_address/<pk>/<data2>',views.update_order_address),
-    path('remove_order_address/<pk>/<data2>',views.remove_order_address),
+    path('update_order_address/<pk>/<int:data2>',views.update_order_address),
+    path('remove_order_address/<pk>/<int:data2>',views.remove_order_address),
     path('delete_order/<pk>',views.delete_order),
     path('order_history',views.order_history),
     path("replace_reorder/<pk>",views.replace_reorder),
@@ -60,5 +60,11 @@ urlpatterns = [
     path('buynow/<pk>',views.buynow),
 
     #Search
-    path('search_func',views.search_func)
+    path('search_func',views.search_func),
+
+
+
+    #payment
+    path('payment/<int:data2>',views.payment),
+    path('razorpay/callback/',views.callback),
 ]
