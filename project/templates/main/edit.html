@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body>
+    <div class="add_product flex flex-col items-center">
+        <div class="flex justify-between p-3 bg-blue-950 text-white h-15 items-center mb-7 " style="width: 100%;">
+            <p class=" text-light text-2xl font-bold">Admin Dashboard</p>
+            <a href="../admin_logout" class="text-light" style="text-decoration: none;"><h6>logout</h6></a>
+        </div>
+        <form action="../edit/{{product.pk}}" method="post" class="flex flex-col border p-3 w-100 gap-2 rounded-xl">
+            {% csrf_token %}
+            <p class="font-bold text-3xl">Update Product</p>
+            <input type="text" name="name" id="" placeholder="Name of the Product" class="border p-1 rounded-xl" value="{{product.name}}">
+            <input type="text" name="type" id="" placeholder="Catorgary" class="border p-1 rounded-xl" value="{{product.type}}"> 
+            <textarea name="description" placeholder="Description" id="" class="border p-1 rounded-xl">{{product.description}}</textarea>
+
+            <input type="submit" value="Update" class="bg-blue-800 text-white p-1 rounded-xl">
+        </form>
+        <!-- <a href="" style="text-decoration: underline;">Add the weight and price to display the product in the home page</a> -->
+    </div>
+</body>
+</html>

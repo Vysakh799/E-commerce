@@ -597,8 +597,7 @@ def replace_product(request):
                 print(k.replacing_date)
                 if k.delivered==True and k.replaced==False and date_obj1 <= k.replacing_date :
                     replaced_items.append(k)
-        print(replaced_items)
-                        
+        print(replaced_items)             
         price=[]
         for i in cart_items:
             of_p=i.w_product.offer_price
@@ -827,3 +826,79 @@ def contact(request):
     else:
         return redirect(login)
     
+
+
+
+#Admin 
+
+
+
+def admin_login(request):
+    admin_username='admin123'
+    admin_password='admin@123'
+    if request.method=='POST':
+        username=request.POST['username']
+        password=request.POST['password']
+        if username==admin_username and password==admin_password:
+            request.session['admin']=username
+            return redirect(admin_index)
+        else:
+            return redirect(admin_login)
+    return render(request,'main/login.html')
+
+
+def admin_index(request):
+    if 'admin' in request.session:
+        products=product.objects.all()[::-1]
+        return render(request,'main/index.html',{'products':products})
+    else:
+        return redirect(admin_login)
+    
+
+def admin_logout(request):
+    if 'admin' in request.session:
+        del request.session['admin']
+        return redirect(admin_login)
+    else:
+        return redirect(admin_login)
+    
+def add_product(request):
+    if 'admin' in request.session:
+        if request.method=='POST':
+            name=request.POST['name']
+            type=request.POST['type']
+            description=request.POST['description']
+            image1=request.FILES['image1']
+            image2=request.FILES['image2']
+            image3=request.FILES['image3']
+            image4=request.FILES['image4']
+            print(image4)
+            data=product.objects.create(name=name,type=type,description=description,image1=image1,image2=image2,image3=image3,image4=image4)
+            data.save()
+            return redirect(add_product)
+        return render(request,'main/add_product.html')
+    else:
+        return redirect(admin_login)
+    
+
+def edit(request,pk):
+    if 'admin' in request.session:
+        cpro=product.objects.get(pk=pk)
+        if request.method=='POST':
+            name=request.POST['name']
+            type=request.POST['type']
+            description=request.POST['description']
+            data=product.objects.filter(pk=pk).update(name=name,type=type,description=description)
+            # data.save()
+            return redirect(admin_index)
+        return render(request,'main/edit.html',{'product':cpro})
+    else:
+        return redirect(admin_login)
+    
+
+def delete(request,pk):
+    if 'admin' in request.session:
+        product.objects.get(pk=pk).delete()
+        return redirect(admin_index)
+    else:
+        return redirect(admin_login)

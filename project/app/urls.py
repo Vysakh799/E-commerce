@@ -67,4 +67,14 @@ urlpatterns = [
     #payment
     path('payment/<int:data2>',views.payment),
     path('razorpay/callback/',views.callback),
+
+
+
+    #Admin
+    path('admin_login',views.admin_login),
+    path('admin_logout',views.admin_logout),
+    path('admin_addproduct',views.add_product),
+    path('edit/<pk>',views.edit),
+    path('delete/<pk>',views.delete),
+
 ]
